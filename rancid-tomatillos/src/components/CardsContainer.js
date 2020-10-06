@@ -1,6 +1,7 @@
 import React from 'react';
 
-function CardsContainer() {
+function CardsContainer(props) {
+    console.log(props)
     return (
         <h1>test</h1>
     )
