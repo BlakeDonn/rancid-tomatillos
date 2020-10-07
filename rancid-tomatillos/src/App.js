@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import MainView from "./components/MainView";
-import CardsContainer from "./components/CardsContainer";
+import {Route} from "react-router-dom";
 
 import "./App.css";
 
@@ -22,8 +22,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <MainView />
-                <CardsContainer allMovies={this.state.movies} />
+                <MainView allMovies={this.state.movies} />
             </div>
         );
     }
