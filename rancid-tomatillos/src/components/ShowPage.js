@@ -1,12 +1,8 @@
 import React from 'react'
 
 function ShowPage(props) {
-    console.log(props)
-    let pCards
-    if (props.movies) {
-        pCards = props.movies.map((movie) => <PreviewCard movie={movie} />);
-    }
-    return <div className="container">{pCards}</div>;
+    return <h1>isworking</h1>
 }
+
 
 export default ShowPage;

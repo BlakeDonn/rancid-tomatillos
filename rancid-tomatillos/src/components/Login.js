@@ -1,12 +1,19 @@
 import React from 'react'
 
-function Login(props) {
-    console.log(props)
-    let pCards
-    if (props.movies) {
-        pCards = props.movies.map((movie) => <PreviewCard movie={movie} />);
+class Login extends React.Component {
+    constructor() {
+        super();
     }
-    return <div className="container">{pCards}</div>;
+    render() {
+        return (
+            <form>
+                <h1>Enter User Details </h1>
+                <input name="username" type="text" value={this.state.password}>Enter User Details </input>
+                <input name="password" type="text" value={this.state.password}>Enter User Details </input>
+                <h1>Enter User Details </h1>
+            </form>
+        )
+    }
 }
 
 export default Login;
