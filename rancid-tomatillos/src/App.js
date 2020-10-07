@@ -11,12 +11,10 @@ class App extends Component {
             movies: null
         };
     }
-    componentDidMount() {
-        return fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({movies: data.movies});
-            });
+    async componentDidMount() {
+        let promise = await fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
+        let result = await promise.json()
+        this.setState({movies: result.movies});
     }
 
     render() {
