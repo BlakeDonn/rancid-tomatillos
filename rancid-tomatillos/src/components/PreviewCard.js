@@ -4,9 +4,9 @@ function PreviewCard({movie}) {
     return (
         <div itemID={movie.id} className="preview-card">
             <img src={movie.poster_path}></img>
-            <h3>{movie.title}</h3>
-            <p>{movie.average_rating}</p>
-            <p>"Your rating"</p>
+            <h3 className="movie-title">{movie.title}</h3>
+            <p className="avg-rating">{movie.average_rating}</p>
+            <p className="user-rating">"Your rating"</p>
             <button></button>
         </div>
     );

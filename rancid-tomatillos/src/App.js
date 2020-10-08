@@ -10,9 +10,11 @@ import "./App.css";
 class App extends Component {
     constructor() {
         super();
+        this.setLoggedIn = this.setLoggedIn.bind(this);
         this.state = {
             movies: null,
             userId: 0,
+            loggedIn: false,
         };
     }
     async componentDidMount() {
@@ -22,20 +24,26 @@ class App extends Component {
         let result = await promise.json();
         this.setState({movies: result.movies});
     }
+    setLoggedIn() {
+        this.setState({loggedIn: true});
+    }
 
     render() {
         return (
             <Router>
                 <Header />
-                <div>
+                <div className="page-container">
                     <Switch>
                         <Route path="/users">
                             <ShowPage />
                         </Route>
-                        <Route path="/login">
-                            <Login />
-                        </Route>
-                        <Route path="/">
+                        <Route
+                            path="/login"
+                            render={(props) => (
+                                <Login {...props} isAuthed={this.setLoggedIn} />
+                            )}
+                        />
+                        <Route isAuthed={false} path="/">
                             <MainView allMovies={this.state.movies} />
                         </Route>
                     </Switch>

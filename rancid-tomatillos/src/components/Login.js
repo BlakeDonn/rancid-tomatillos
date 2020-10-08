@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import MainView from "./MainView";
 
 class Login extends React.Component {
@@ -36,31 +36,33 @@ class Login extends React.Component {
         if (result.error) {
             alert("Wrong info");
         } else {
-            return console.log(this.props.history);
+            this.props.isAuthed()
+            this.props.history.push('/')
         }
     }
     //'marge@turing.io', password: 'password123'
     render() {
-        console.log(this);
         return (
-            <form>
-                <h1>Enter User Details </h1>
-                <input
-                    name="email"
-                    type="text"
-                    onChange={this.updateValue}
-                    value={this.state.username}
-                ></input>
-                <input
-                    name="password"
-                    type="text"
-                    onChange={this.updateValue}
-                    value={this.state.password}
-                ></input>
-                <button onClick={this.submitUserInfo}>
-                    Enter User Details{" "}
-                </button>
-            </form>
+            <div className="login-container">
+                <form clasName="login-form">
+                    <h1>Enter User Details</h1>
+                    <input
+                        name="email"
+                        type="text"
+                        onChange={this.updateValue}
+                        value={this.state.username}
+                    ></input>
+                    <input
+                        name="password"
+                        type="text"
+                        onChange={this.updateValue}
+                        value={this.state.password}
+                    ></input>
+                    <button onClick={this.submitUserInfo}>
+                        Enter User Details{" "}
+                    </button>
+                </form>
+            </div>
         );
     }
 }
