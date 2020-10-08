@@ -1,4 +1,5 @@
 import React from "react";
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
 class Login extends React.Component {
     constructor() {
@@ -13,16 +14,27 @@ class Login extends React.Component {
     };
     submitUserInfo = (event) => {
         event.preventDefault();
-        fetch("https://rancid-tomatillos.herokuapp.com/api/v2/login", {
+        this.postUserData()
+    }
+
+    async postUserData() {
+        const promise = await fetch("https://rancid-tomatillos.herokuapp.com/api/v2/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(this.state),
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-    };
+        });
+        let result = await promise.json();
+        this.resultHandler(result)
+    }
+    resultHandler(result) {
+        if (result.error) {
+            alert("Wrong info")
+        }
+
+        console.log(result)
+    }
     //'marge@turing.io', password: 'password123'
     render() {
         console.log(this);
