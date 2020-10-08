@@ -10,11 +10,10 @@ import "./App.css";
 class App extends Component {
     constructor() {
         super();
-        this.setLoggedIn = this.setLoggedIn.bind(this);
         this.state = {
+            loggedIn: false,
             movies: null,
             userId: 0,
-            loggedIn: false,
         };
     }
     async componentDidMount() {
@@ -24,14 +23,14 @@ class App extends Component {
         let result = await promise.json();
         this.setState({movies: result.movies});
     }
-    setLoggedIn() {
+    setLoggedIn = () => {
         this.setState({loggedIn: true});
-    }
+    };
 
     render() {
         return (
             <Router>
-                <Header />
+                <Header loggedIn={this.state.loggedIn} />
                 <div className="page-container">
                     <Switch>
                         <Route path="/users">
@@ -43,7 +42,7 @@ class App extends Component {
                                 <Login {...props} isAuthed={this.setLoggedIn} />
                             )}
                         />
-                        <Route isAuthed={false} path="/">
+                        <Route isAuthed={true} path="/">
                             <MainView allMovies={this.state.movies} />
                         </Route>
                     </Switch>
