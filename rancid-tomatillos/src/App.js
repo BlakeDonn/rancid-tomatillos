@@ -12,6 +12,7 @@ class App extends Component {
         super();
         this.state = {
             movies: null,
+            userId: 0,
         };
     }
     async componentDidMount() {
