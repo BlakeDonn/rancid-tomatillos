@@ -1,11 +1,10 @@
 import React from "react";
-import Header from "./Header"
-//import CardContainer from "./CardContainer";
+import CardsContainer from "./CardsContainer";
 
-function MainView() {
+function MainView(props) {
     return (
         <main>
-            <Header />
+            <CardsContainer movies={props.allMovies} />
         </main>
     );
 }
