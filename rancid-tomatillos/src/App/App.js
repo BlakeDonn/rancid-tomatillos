@@ -18,7 +18,7 @@ class App extends Component {
         this.state = {
             loggedIn: false,
             movies: null,
-            error: '',
+            error: "",
         };
     }
     async componentDidMount() {
@@ -29,9 +29,8 @@ class App extends Component {
             let result = await promise.json();
             this.setState({movies: result.movies});
         } else {
-            this.setState({error: promise.status})
+            this.setState({error: promise.status});
         }
-
     }
     toggleLogin = () => {
         this.setState({loggedIn: !this.state.loggedIn});
