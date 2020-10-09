@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 const Header = (props) => {
-    console.log(props)
+    console.log(props);
     return (
         <nav>
             <h1>Rotten Tomatillos</h1>
@@ -13,11 +13,17 @@ const Header = (props) => {
                     <Link to="/about">About</Link>
                 </li>
                 <li>
-                    {!props.loggedIn ? <Link to="/login">Login</Link> : <Link to="/">Logout</Link>}
+                    {!props.loggedIn ? (
+                        <Link to="/login">Login</Link>
+                    ) : (
+                            <Link to="/" onClick={props.isAuthed}>
+                                Logout
+                            </Link>
+                        )}
                 </li>
             </ul>
         </nav>
     );
-}
+};
 
 export default Header;

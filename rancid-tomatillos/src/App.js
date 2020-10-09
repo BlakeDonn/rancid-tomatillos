@@ -23,14 +23,14 @@ class App extends Component {
         let result = await promise.json();
         this.setState({movies: result.movies});
     }
-    setLoggedIn = () => {
-        this.setState({loggedIn: true});
+    toggleLogin = () => {
+        this.setState({loggedIn: !this.state.loggedIn});
     };
 
     render() {
         return (
             <Router>
-                <Header loggedIn={this.state.loggedIn} />
+                <Header isAuthed={this.toggleLogin} loggedIn={this.state.loggedIn} />
                 <div className="page-container">
                     <Switch>
                         <Route path="/users">
@@ -39,7 +39,7 @@ class App extends Component {
                         <Route
                             path="/login"
                             render={(props) => (
-                                <Login {...props} isAuthed={this.setLoggedIn} />
+                                <Login {...props} isAuthed={this.toggleLogin} />
                             )}
                         />
                         <Route isAuthed={true} path="/">
