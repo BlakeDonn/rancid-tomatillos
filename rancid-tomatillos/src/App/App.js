@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import MainView from "./Dashboard/Dashboard";
-import Header from "./Header/Header";
-import Login from "./Login/Login";
-import ShowPage from "./MoviePage/MoviePage";
+import Dashboard from "../Dashboard/Dashboard";
+import Header from "../Header/Header";
+import Login from "../Login/Login";
+import ShowPage from "../MoviePage/MoviePage";
 
 import "./App.css";
 
@@ -43,7 +43,7 @@ class App extends Component {
                             )}
                         />
                         <Route isAuthed={true} path="/">
-                            <MainView allMovies={this.state.movies} />
+                            <Dashboard allMovies={this.state.movies} />
                         </Route>
                     </Switch>
                 </div>

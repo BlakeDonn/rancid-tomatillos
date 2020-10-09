@@ -10,6 +10,7 @@ function PreviewCard({id, poster_path, title, average_rating}) {
             <button></button>
         </div>
     );
+
 }
 
 export default PreviewCard;
