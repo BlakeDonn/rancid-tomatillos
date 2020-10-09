@@ -1,7 +1,7 @@
 import React from "react";
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import MainView from "./MainView";
+import MainView from "../Dashboard/Dashboard";
 
 class Login extends React.Component {
     constructor() {

@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import MainView from "./components/MainView";
-import Header from "./components/Header";
-import Login from "./components/Login";
-import ShowPage from "./components/ShowPage";
+import MainView from "./Dashboard/Dashboard";
+import Header from "./Header/Header";
+import Login from "./Login/Login";
+import ShowPage from "./MoviePage/MoviePage";
 
 import "./App.css";
 
