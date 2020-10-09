@@ -1,5 +1,10 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+} from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
@@ -13,15 +18,20 @@ class App extends Component {
         this.state = {
             loggedIn: false,
             movies: null,
-            userId: 0,
+            error: '',
         };
     }
     async componentDidMount() {
         let promise = await fetch(
-            "https://rancid-tomatillos.herokuapp.com/api/v2/movies"
+            "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
         );
-        let result = await promise.json();
-        this.setState({movies: result.movies});
+        if (promise.ok) {
+            let result = await promise.json();
+            this.setState({movies: result.movies});
+        } else {
+            this.setState({error: promise.status})
+        }
+
     }
     toggleLogin = () => {
         this.setState({loggedIn: !this.state.loggedIn});
@@ -30,7 +40,10 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Header isAuthed={this.toggleLogin} loggedIn={this.state.loggedIn} />
+                <Header
+                    isAuthed={this.toggleLogin}
+                    loggedIn={this.state.loggedIn}
+                />
                 <div className="page-container">
                     <Switch>
                         <Route path="/users">
@@ -42,9 +55,17 @@ class App extends Component {
                                 <Login {...props} isAuthed={this.toggleLogin} />
                             )}
                         />
-                        <Route isAuthed={true} path="/">
-                            <Dashboard allMovies={this.state.movies} />
-                        </Route>
+                        <Route
+                            exact
+                            path="/"
+                            render={() =>
+                                this.state.error > 400 ? (
+                                    <Redirect to="/error" />
+                                ) : (
+                                        <Dashboard allMovies={this.state.movies} />
+                                    )
+                            }
+                        />
                     </Switch>
                 </div>
             </Router>
