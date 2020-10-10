@@ -51,7 +51,10 @@ class App extends Component {
                         <Route
                             path="/login"
                             render={(props) => (
-                                <Login {...props} toggleLogin={this.toggleLogin} />
+                                <Login
+                                    {...props}
+                                    toggleLogin={this.toggleLogin}
+                                />
                             )}
                         />
                         <Route
