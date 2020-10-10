@@ -33,11 +33,10 @@ class Login extends React.Component {
     }
     resultHandler(result) {
         if (result.error) {
-            this.setState({badLogin: true})
-
+            this.setState({password: '', email: '', badLogin: true});
         } else {
-            this.props.isAuthed()
-            this.props.history.push('/')
+            this.props.toggleLogin(result.id, result.name);
+            this.props.history.push("/");
         }
     }
     //'marge@turing.io', password: 'password123'
@@ -54,7 +53,7 @@ class Login extends React.Component {
                     ></input>
                     <input
                         name="password"
-                        type="text"
+                        //type="password"
                         onChange={this.updateValue}
                         value={this.state.password}
                     ></input>
