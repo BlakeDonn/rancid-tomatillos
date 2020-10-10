@@ -7,7 +7,6 @@ import * as serviceWorker from './serviceWorker';
 
 const router = <BrowserRouter> <App /> </BrowserRouter>
 
-console.log(ReactDOM)
 ReactDOM.render(
     router, document.getElementById('root')
 );

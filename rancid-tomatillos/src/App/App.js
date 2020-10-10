@@ -17,7 +17,7 @@ class App extends Component {
         super();
         this.state = {
             loggedIn: false,
-            movies: null,
+            movies: [],
             error: "",
         };
     }
@@ -27,12 +27,13 @@ class App extends Component {
         );
         if (promise.ok) {
             let result = await promise.json();
+            console.log(result.movies);
             this.setState({movies: result.movies});
         } else {
             this.setState({error: promise.status});
         }
     }
-    toggleLogin = () => {
+    toggleLogin = (id) => {
         this.setState({loggedIn: !this.state.loggedIn});
     };
 
@@ -40,7 +41,7 @@ class App extends Component {
         return (
             <Router>
                 <Header
-                    isAuthed={this.toggleLogin}
+                    toggleLogin={this.toggleLogin}
                     loggedIn={this.state.loggedIn}
                 />
                 <div className="page-container">
@@ -51,7 +52,10 @@ class App extends Component {
                         <Route
                             path="/login"
                             render={(props) => (
-                                <Login {...props} isAuthed={this.toggleLogin} />
+                                <Login
+                                    {...props}
+                                    toggleLogin={this.toggleLogin}
+                                />
                             )}
                         />
                         <Route
