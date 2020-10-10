@@ -36,8 +36,8 @@ class App extends Component {
     toggleLogin = (id) => {
         this.setState({loggedIn: !this.state.loggedIn});
     };
-    showMovie = () => {
-        console.log('testststest')
+    showMovie = (id) => {
+        console.log(id)
     }
     render() {
         return (
