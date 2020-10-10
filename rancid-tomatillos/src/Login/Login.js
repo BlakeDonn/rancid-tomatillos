@@ -33,8 +33,10 @@ class Login extends React.Component {
     }
     resultHandler(result) {
         if (result.error) {
+            console.log('test1')
             this.setState({password: "", email: "", badLogin: true});
         } else {
+            console.log('test2')
             this.props.toggleLogin(result.id, result.name);
             this.props.history.push("/");
         }
@@ -48,7 +50,7 @@ class Login extends React.Component {
                     <input
                         placeholder="email"
                         name="email"
-                        type="text"
+                        //type="text"
                         onChange={this.updateValue}
                         value={this.state.username}
                     ></input>
@@ -60,7 +62,7 @@ class Login extends React.Component {
                         value={this.state.password}
                     ></input>
                     <button onClick={this.submitUserInfo}>
-                        Enter User Details{" "}
+                        Enter User Details
                     </button>
                 </form>
                 {this.state.badLogin ? <h3>Incorrect Login</h3> : null}
