@@ -4,5 +4,3 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import Dashboard from "./Dashboard";
 
-describe("Dashboard", () => {
-});

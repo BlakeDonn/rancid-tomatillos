@@ -33,7 +33,7 @@ class Login extends React.Component {
     }
     resultHandler(result) {
         if (result.error) {
-            this.setState({password: '', email: '', badLogin: true});
+            this.setState({password: "", email: "", badLogin: true});
         } else {
             this.props.toggleLogin(result.id, result.name);
             this.props.history.push("/");
@@ -46,12 +46,14 @@ class Login extends React.Component {
                 <form clasName="login-form">
                     <h1>Enter User Details</h1>
                     <input
+                        placeholder="email"
                         name="email"
                         type="text"
                         onChange={this.updateValue}
                         value={this.state.username}
                     ></input>
                     <input
+                        placeholder="password"
                         name="password"
                         //type="password"
                         onChange={this.updateValue}
