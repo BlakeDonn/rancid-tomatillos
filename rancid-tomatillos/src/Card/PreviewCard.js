@@ -1,12 +1,12 @@
 import React from "react";
 
-const PreviewCard = ({id, poster_path, title, average_rating, showMovie}) => {
-    console.log(this)
+const PreviewCard = ({movie, showMovie}) => {
+    console.log(movie.id)
     return (
-        <div itemID={id} className="preview-card">
-            <img src={poster_path} alt={`poster of ${title}`} onClick={showMovie}></img>
-            <h3 className="movie-title">{title}</h3>
-            <p className="avg-rating">{average_rating}</p>
+        <div itemID={movie.id} className="preview-card" onClick={showMovie}>
+            <img src={movie.poster_path} alt={`poster of ${movie.title}`}></img>
+            <h3 className="movie-title">{movie.title}</h3>
+            <p className="avg-rating">{movie.average_rating}</p>
             <p className="user-rating">"Your rating"</p>
         </div>
     );
