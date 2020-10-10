@@ -1,7 +1,7 @@
 import React from "react";
-import CardsContainer from "./CardsContainer";
+import CardsContainer from "../CardsContainer/CardsContainer";
 
-function MainView(props) {
+function Dashboard(props) {
     return (
         <main>
             <CardsContainer movies={props.allMovies} />
@@ -9,4 +9,4 @@ function MainView(props) {
     );
 }
 
-export default MainView;
+export default Dashboard;

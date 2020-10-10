@@ -1,6 +1,4 @@
 import React from "react";
-import {BrowserRouter as Router, Route} from "react-router-dom";
-import MainView from "./MainView";
 
 class Login extends React.Component {
     constructor() {
@@ -8,6 +6,7 @@ class Login extends React.Component {
         this.state = {
             email: "",
             password: "",
+            badLogin: false,
         };
     }
     updateValue = (event) => {
@@ -34,7 +33,8 @@ class Login extends React.Component {
     }
     resultHandler(result) {
         if (result.error) {
-            alert("Wrong info");
+            this.setState({badLogin: true})
+
         } else {
             this.props.isAuthed()
             this.props.history.push('/')
@@ -62,6 +62,7 @@ class Login extends React.Component {
                         Enter User Details{" "}
                     </button>
                 </form>
+                {this.state.badLogin ? <h3>Incorrect Login</h3> : null}
             </div>
         );
     }
