@@ -5,7 +5,7 @@ function Dashboard(props) {
     console.log(props.allMovies)
     return (
         <main>
-            <CardsContainer movies={props.allMovies} />
+            <CardsContainer movies={props.allMovies} showMovie={props.showMovie} />
         </main>
     );
 }

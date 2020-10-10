@@ -36,7 +36,9 @@ class App extends Component {
     toggleLogin = (id) => {
         this.setState({loggedIn: !this.state.loggedIn});
     };
-
+    showMovie = () => {
+        console.log('testststest')
+    }
     render() {
         return (
             <Router>
@@ -65,7 +67,7 @@ class App extends Component {
                                 this.state.error > 400 ? (
                                     <Redirect to="/error" />
                                 ) : (
-                                        <Dashboard allMovies={this.state.movies} />
+                                        <Dashboard allMovies={this.state.movies} showMovie={this.showMovie}/>
                                     )
                             }
                         />
