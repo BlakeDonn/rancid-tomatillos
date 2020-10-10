@@ -8,15 +8,17 @@ describe("Card", () => {
     it("should render a card", () => {
         render(
             <PreviewCard
-                id={3}
-                poster_path="fake-url"
-                title="Star Wars"
-                average_rating={6}
+                average_rating={9}
+                backdrop_path="testback"
+                id={694919}
+                poster_path="testpath"
+                release_date="test-date"
+                title="Test Title"
             />
         );
-        expect(
-            screen.getByText("Star Wars")
-        ).toBeInTheDocument();
-        expect(screen.getByText("6")).toBeInTheDocument();
+        screen.debug();
+        expect(screen.getByText("Test Title")).toBeInTheDocument();
+        expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
+        expect(screen.getByText("9")).toBeInTheDocument();
     });
 });

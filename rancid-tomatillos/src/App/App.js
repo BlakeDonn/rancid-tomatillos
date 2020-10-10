@@ -27,6 +27,7 @@ class App extends Component {
         );
         if (promise.ok) {
             let result = await promise.json();
+            console.log(result.movies)
             this.setState({movies: result.movies});
         } else {
             this.setState({error: promise.status});
