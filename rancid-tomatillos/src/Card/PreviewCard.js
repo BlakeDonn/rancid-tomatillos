@@ -1,7 +1,6 @@
 import React from "react";
 
 const PreviewCard = ({movie, showMovie}) => {
-    console.log(movie.id)
     return (
         <div itemID={movie.id} className="preview-card" onClick={() => showMovie(movie.id)}>
             <img src={movie.poster_path} alt={`poster of ${movie.title}`}></img>

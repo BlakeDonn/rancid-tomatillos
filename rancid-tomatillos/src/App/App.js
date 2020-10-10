@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
+    Redirect
 } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
@@ -37,7 +37,11 @@ class App extends Component {
         this.setState({loggedIn: !this.state.loggedIn});
     };
     showMovie = (id) => {
-        console.log(id)
+        // pass in id to link to fetch
+        console.log(this)
+        return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+        .then(response => response.json())
+        .then(movie => console.log(movie.movie))
     }
     render() {
         return (
@@ -63,11 +67,11 @@ class App extends Component {
                         <Route
                             exact
                             path="/"
-                            render={() =>
+                            render={(props) =>
                                 this.state.error > 400 ? (
                                     <Redirect to="/error" />
                                 ) : (
-                                        <Dashboard allMovies={this.state.movies} showMovie={this.showMovie}/>
+                                        <Dashboard {...props} allMovies={this.state.movies} showMovie={this.showMovie}/>
                                     )
                             }
                         />
