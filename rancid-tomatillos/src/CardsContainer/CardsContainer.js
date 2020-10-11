@@ -6,7 +6,7 @@ function CardsContainer(props) {
     return (
       <PreviewCard
         history={props.history}
-        movie={movie}
+        {...movie}
       />
     );
   });

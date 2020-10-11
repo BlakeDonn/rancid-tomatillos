@@ -4,8 +4,8 @@ import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import PreviewCard from "./PreviewCard";
 
-describe.skip("Card", () => {
-  it.skip("should render a card", () => {
+describe("Card", () => {
+  beforeEach(() => {
     render(
       <PreviewCard
         average_rating={9}
@@ -16,9 +16,14 @@ describe.skip("Card", () => {
         title="Test Title"
       />
     );
-    screen.debug();
+  })
+  it("should render a card", () => {
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
     expect(screen.getByText("9")).toBeInTheDocument();
   });
+
+  it("should invoke redirection to movie page with a movie's id", () => {
+    
+  })
 });
