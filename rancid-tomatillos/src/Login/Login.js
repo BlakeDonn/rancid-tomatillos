@@ -1,4 +1,5 @@
 import React from "react";
+import api from "../api";
 
 class Login extends React.Component {
   constructor() {
@@ -18,18 +19,9 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    const promise = await fetch(
-      "https://rancid-tomatillos.herokuapp.com/api/v2/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.state),
-      }
-    );
-    let result = await promise.json();
-    this.resultHandler(result);
+    let promise = await api.postUserLogin(this.state)
+    promise = await promise.json()
+    this.resultHandler(promise);
   }
   resultHandler(result) {
     if (result.error) {
