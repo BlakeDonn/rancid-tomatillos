@@ -10,6 +10,12 @@ const api = {
         movie: movie.movie,
       },
     });
+  },
+
+  async getAllMovies() {
+    return fetch(
+      "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
+    );
   }
 
 }

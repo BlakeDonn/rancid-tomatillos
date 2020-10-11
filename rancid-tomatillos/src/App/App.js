@@ -10,6 +10,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
+import api from "../api";
 
 import "./App.css";
 
@@ -23,15 +24,14 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    let promise = await fetch(
-      "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
-    );
-    if (promise.ok) {
-      let result = await promise.json();
+    const allMovies = await api.getAllMovies() 
+    console.log(allMovies)
+    if (allMovies.ok) {
+      let result = await allMovies.json();
       console.log(result.movies);
       this.setState({movies: result.movies});
     } else {
-      this.setState({error: promise.status});
+      this.setState({error: allMovies.status});
     }
   }
   toggleLogin = (id) => {
