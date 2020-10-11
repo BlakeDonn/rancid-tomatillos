@@ -8,7 +8,7 @@ import {createMemoryHistory} from "history";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 
-describe.only("App", () => {
+describe("App", () => {
   test("User is redirected to login page on link click", () => {
     const history = createMemoryHistory();
     render(
@@ -22,7 +22,7 @@ describe.only("App", () => {
       screen.getByRole("button", {name: "Enter User Details"})
     ).toBeInTheDocument();
   });
-  test.only("User can log in", () => {
+  test("User can log in", () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
