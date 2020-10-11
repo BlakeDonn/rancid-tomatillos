@@ -1,18 +1,9 @@
 import React from "react";
+import api from '../api';
+
 function MoviePage(props) {
   let id = props.location.pathname.split("/")[2];
-  const constMovieFetch = async () => {
-    let promise = await fetch(
-      `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
-    );
-    let movie = await promise.json();
-    props.history.push({
-      pathname: "/movie",
-      state: {
-        movie: movie.movie,
-      },
-    });
-  };
+
   if (props.match.isExact) {
     console.log(props);
     const {
@@ -43,7 +34,7 @@ function MoviePage(props) {
       </div>
     );
   } else {
-    constMovieFetch();
+    api.constMovieFetch(id, props);
     return <h1>Loading</h1>;
   }
 }
