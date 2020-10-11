@@ -6,6 +6,8 @@ import PreviewCard from "./PreviewCard";
 
 describe("Card", () => {
   beforeEach(() => {
+    const fakeClick = { push: jest.fn(id) }
+ 
     render(
       <PreviewCard
         average_rating={9}
@@ -14,6 +16,7 @@ describe("Card", () => {
         poster_path="testpath"
         release_date="test-date"
         title="Test Title"
+        onClick={fakeClick}
       />
     );
   })
@@ -24,6 +27,7 @@ describe("Card", () => {
   });
 
   it("should invoke redirection to movie page with a movie's id", () => {
-    
+    userEvent.click(screen.getByRole('button', {id: "9"}));
+    expect(fakeClick).toHaveBeenCalled();
   })
 });

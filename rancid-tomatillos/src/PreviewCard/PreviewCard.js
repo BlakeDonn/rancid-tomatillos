@@ -5,6 +5,7 @@ const PreviewCard = ({history, id, poster_path, title, average_rating}) => {
     <div
       itemID={id}
       className="preview-card"
+      role="button"
       onClick={() => history.push(`movie/${id}`)}
     >
       <img src={poster_path} alt={`poster of ${title}`}></img>
