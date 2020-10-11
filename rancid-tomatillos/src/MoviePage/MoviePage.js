@@ -34,7 +34,7 @@ function MoviePage(props) {
       </div>
     );
   } else {
-    api.constMovieFetch(id, props);
+    api.getIndividualMovie(id, props);
     return <h1>Loading</h1>;
   }
 }

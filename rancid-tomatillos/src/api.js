@@ -1,5 +1,5 @@
 const api = {
-  async constMovieFetch(id, props) {
+  async getIndividualMovie(id, props) {
     let promise = await fetch(
       `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
     );
@@ -11,6 +11,7 @@ const api = {
       },
     });
   }
+
 }
 
 export default api
