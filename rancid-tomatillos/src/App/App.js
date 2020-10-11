@@ -44,7 +44,7 @@ class App extends Component {
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
-            <Route path="/movie" render={(props) => <MoviePage {...props} useMe={{}} />} />
+            <Route path="/movie" render={(props) => <MoviePage {...props} />} />
             <Route
               path="/login"
               render={(props) => (

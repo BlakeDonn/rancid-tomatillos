@@ -38,7 +38,7 @@ function MoviePage(props) {
         <p className="release-date"> {release_date}</p>
         <p className="revenue">{revenue ? revenue : "Not released"}</p>
         <p className="runtime"> {runtime} minutes</p>
-        {budget ? <p>className="budget"{budget}</p> : null}
+        {budget ? <p className="budget">{budget}</p> : null}
         {tagline ? <p className="tagline"> {tagline}</p> : null}
       </div>
     );
