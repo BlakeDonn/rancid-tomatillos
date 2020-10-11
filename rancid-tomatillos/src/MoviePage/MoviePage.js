@@ -1,8 +1,12 @@
-import React from 'react'
+import React from "react";
 
-function ShowPage(props) {
-    return <h1>isworking</h1>
+function MoviePage(props) {
+  console.log(props)
+  let id = props.location.pathname.split("/")[2];
+  fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
+    .then((response) => response.json())
+    .then((movie) => console.log(movie));
+  return <h1>hi</h1>;
 }
 
-
-export default ShowPage;
+export default MoviePage;
