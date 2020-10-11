@@ -1,5 +1,5 @@
 import React from "react";
-import PreviewCard from "../Card/PreviewCard";
+import PreviewCard from "../PreviewCard/PreviewCard";
 
 function CardsContainer(props) {
   let pCards = props.movies.map((movie) => {
