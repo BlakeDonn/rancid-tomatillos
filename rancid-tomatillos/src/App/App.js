@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   Redirect,
-  withRouter,
 } from "react-router-dom";
 import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
