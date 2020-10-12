@@ -1,10 +1,17 @@
 import React from "react";
-import PreviewCard from "../Card/PreviewCard";
+import PreviewCard from "../PreviewCard/PreviewCard";
 
 function CardsContainer(props) {
-    console.log(props)
-    let pCards = props.movies.map((movie) => <PreviewCard {...movie} />);
-    return <div className="container">{pCards}</div>;
+  let pCards = props.movies.map((movie) => {
+    return (
+      <PreviewCard
+        history={props.history}
+        {...movie}
+      />
+    );
+  });
+
+  return <div className="container">{pCards}</div>;
 }
 
 export default CardsContainer;
