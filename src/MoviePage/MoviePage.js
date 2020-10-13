@@ -1,11 +1,10 @@
 import React from "react";
-import { getIndividualMovie } from '../api';
+import {getIndividualMovie} from '../api';
 
 function MoviePage(props) {
+  console.log(props)
   let id = props.location.pathname.split("/")[2];
-  
   if (props.match.isExact) {
-    console.log(props);
     const {
       average_rating,
       backdrop_path,
