@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import { getIndividualMovie, getAllMovies, postUserLogin } from "../api";
+import { getAllMovies } from "../api";
 
 import "./App.css";
 
@@ -23,7 +23,7 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const allMovies = await api.getAllMovies() 
+    const allMovies = await getAllMovies() 
     console.log(allMovies)
     if (allMovies.ok) {
       let result = await allMovies.json();
