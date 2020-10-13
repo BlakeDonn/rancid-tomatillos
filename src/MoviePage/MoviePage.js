@@ -1,9 +1,9 @@
 import React from "react";
-import api from '../api';
+import { getIndividualMovie } from '../api';
 
 function MoviePage(props) {
   let id = props.location.pathname.split("/")[2];
-
+  
   if (props.match.isExact) {
     console.log(props);
     const {
@@ -29,12 +29,12 @@ function MoviePage(props) {
         <p className="release-date"> {release_date}</p>
         <p className="revenue">{revenue ? revenue : "Not released"}</p>
         <p className="runtime"> {runtime} minutes</p>
-        {budget ? <p className="budget">{budget}</p> : null}
-        {tagline ? <p className="tagline"> {tagline}</p> : null}
+        {budget && <p className="budget">{budget}</p>}
+        {tagline && <p className="tagline"> {tagline}</p>}
       </div>
     );
   } else {
-    api.getIndividualMovie(id, props);
+    getIndividualMovie(id, props);
     return <h1>Loading</h1>;
   }
 }
