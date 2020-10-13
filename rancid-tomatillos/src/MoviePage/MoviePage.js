@@ -1,5 +1,5 @@
 import React from "react";
-import api from '../api';
+import { getIndividualMovie } from '../api';
 
 function MoviePage(props) {
   let id = props.location.pathname.split("/")[2];
@@ -34,7 +34,7 @@ function MoviePage(props) {
       </div>
     );
   } else {
-    api.getIndividualMovie(id, props);
+    getIndividualMovie(id, props);
     return <h1>Loading</h1>;
   }
 }
