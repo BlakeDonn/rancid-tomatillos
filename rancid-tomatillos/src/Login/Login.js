@@ -25,7 +25,6 @@ class Login extends React.Component {
   }
   resultHandler(result) {
     if (result.error) {
-      console.log("test1");
       this.setState({password: "", email: "", badLogin: true});
     } else {
       console.log("test2");

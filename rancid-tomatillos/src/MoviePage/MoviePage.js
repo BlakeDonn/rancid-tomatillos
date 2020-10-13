@@ -3,7 +3,7 @@ import { getIndividualMovie } from '../api';
 
 function MoviePage(props) {
   let id = props.location.pathname.split("/")[2];
-
+  
   if (props.match.isExact) {
     console.log(props);
     const {
