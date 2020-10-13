@@ -19,7 +19,7 @@ describe("App", () => {
     userEvent.click(screen.getByRole("link", {name: "Login"}));
     expect(screen.getByText(/login/i)).toBeInTheDocument();
     expect(
-      screen.getByRole("button", {name: "Enter User Details"})
+      screen.getByRole("button", {name: "Submit"})
     ).toBeInTheDocument();
   });
   test("User can log in", () => {
@@ -35,7 +35,7 @@ describe("App", () => {
     expect(screen.getByPlaceholderText("email")).toHaveValue("marge@turing.io");
     expect(screen.getByPlaceholderText("password")).toHaveValue("test");
     screen.debug();
-    userEvent.click(screen.getByRole("button", {name: "Enter User Details"}));
+    userEvent.click(screen.getByRole("button", {name: "Submit"}));
     //expect(screen.getByText("incorrect login")).toBeInTheDocument()
   });
 });

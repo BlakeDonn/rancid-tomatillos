@@ -1,5 +1,5 @@
 import React from "react";
-import { postUserLogin } from "../api";
+import {postUserLogin} from "../api";
 
 class Login extends React.Component {
   constructor() {
@@ -52,7 +52,7 @@ class Login extends React.Component {
             onChange={this.updateValue}
             value={this.state.password}
           ></input>
-          <button onClick={this.submitUserInfo}>Enter User Details</button>
+          <button onClick={this.submitUserInfo}>Submit</button>
         </form>
         {this.state.badLogin ? <h3>Incorrect Login</h3> : null}
       </div>
