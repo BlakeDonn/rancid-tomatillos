@@ -1,4 +1,4 @@
-export const async getIndividualMovie(id, props) {
+export const getIndividualMovie = async (id, props) => {
   let promise = await fetch(
     `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
   );
@@ -11,13 +11,13 @@ export const async getIndividualMovie(id, props) {
   });
 }
 
-export const async getAllMovies() {
+export const getAllMovies = async () => {
   return fetch(
     "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
   );
 }
 
-export const async postUserLogin(loginInfo) {
+export const postUserLogin = async (loginInfo) => {
   return fetch(
     "https://rancid-tomatillos.herokuapp.com/api/v2/login",
     {

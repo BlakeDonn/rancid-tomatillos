@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import api from "../api";
+import { getIndividualMovie, getAllMovies, postUserLogin } from "../api";
 
 import "./App.css";
 
