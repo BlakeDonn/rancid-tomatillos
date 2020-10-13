@@ -2,8 +2,17 @@ import React from "react";
 import {getIndividualMovie} from '../api';
 
 function MoviePage(props) {
-  console.log(props)
   let id = props.location.pathname.split("/")[2];
+
+  const initiateMovieFetch = async (id) => {
+    let response = await getIndividualMovie(id);
+    props.history.push({
+      pathname: "/movie",
+      state: {
+        movie: response.movie,
+      }
+    });
+  }
   if (props.match.isExact) {
     const {
       average_rating,
@@ -33,7 +42,7 @@ function MoviePage(props) {
       </div>
     );
   } else {
-    getIndividualMovie(id, props);
+    initiateMovieFetch(id, props)
     return <h1>Loading</h1>;
   }
 }

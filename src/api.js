@@ -3,16 +3,8 @@ export const getIndividualMovie = async (id, props) => {
     let promise = await fetch(
       `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
     )
-    
-    let movie = await promise.json();
-  
-    props.history.push({
-      pathname: "/movie",
-      state: {
-        movie: movie.movie,
-      }
-    });
-  } catch(err) {
+    return await promise.json();
+  } catch (err) {
     props.history.push({
       pathname: "/error",
       state: {
