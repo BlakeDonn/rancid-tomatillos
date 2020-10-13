@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../api";
+import { postUserLogin } from "../api";
 
 class Login extends React.Component {
   constructor() {
@@ -19,7 +19,7 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    let promise = await api.postUserLogin(this.state)
+    let promise = await postUserLogin(this.state)
     promise = await promise.json()
     this.resultHandler(promise);
   }
