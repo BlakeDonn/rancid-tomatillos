@@ -24,12 +24,11 @@ class App extends Component {
   }
   async componentDidMount() {
     const allMovies = await getAllMovies();
-    if (allMovies.ok) {
-      let result = await allMovies.json();
-      console.log(result.movies);
-      this.setState({movies: result.movies});
+    let movies = allMovies.movies
+    if (movies.length) {
+      this.setState({movies});
     } else {
-      this.setState({error: allMovies.status});
+      this.setState({error: movies.status});
     }
   }
   toggleLogin = (id) => {
