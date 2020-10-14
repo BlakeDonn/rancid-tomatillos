@@ -24,7 +24,6 @@ class App extends Component {
   }
   async componentDidMount() {
     const allMovies = await getAllMovies();
-    console.log(allMovies);
     if (allMovies.ok) {
       let result = await allMovies.json();
       console.log(result.movies);

@@ -1,5 +1,4 @@
 import React from "react";
-import {Redirect} from 'react-router-dom'
 import {postUserLogin} from "../api";
 
 class Login extends React.Component {
@@ -34,7 +33,6 @@ class Login extends React.Component {
       }
     } catch (e) {}
   }
-  //'marge@turing.io', password: 'password123'
   render() {
     return (
       <div className="login-container">

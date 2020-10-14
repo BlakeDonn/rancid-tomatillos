@@ -1,5 +1,3 @@
-// test click on preview card in app
-// test render in MoviePage.test
 import React from "react";
 import MoviePage from "./MoviePage";
 import {render, screen, waitFor} from "@testing-library/react";
