@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import {getAllMovies, getUserRatings} from "../api";
+import {getAllMovies, getUserRatings, postUserRating} from "../api";
 
 import "./App.css";
 
@@ -40,6 +40,7 @@ class App extends Component {
       userId: id,
       userRatings: ratings.ratings
       });
+      console.log(this)
   };
 
   render() {
@@ -69,7 +70,7 @@ class App extends Component {
                 this.state.error > 400 ? (
                   <Redirect to="/error" />
                 ) : (
-                    <Dashboard {...props} allMovies={this.state.movies} />
+                    <Dashboard {...props} allMovies={this.state.movies} userRatings={this.state.userRatings} />
                   )
               }
             />

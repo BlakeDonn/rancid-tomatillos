@@ -37,4 +37,19 @@ export const getUserRatings = async (id) => {
   const promise = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`)
   return await promise.json()
   //add error later
+};
+
+//removehardcoded bits
+export const postUserRating = async () => {
+  const promise = await fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v2/users/84/ratings`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({movie_id: 539885, rating: 5}),
+    }
+  );
+  return await promise.json();
 }
