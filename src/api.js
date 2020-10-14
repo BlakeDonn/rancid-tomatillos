@@ -32,3 +32,9 @@ export const postUserLogin = async (loginInfo) => {
   );
   return await promise.json();
 };
+
+export const getUserRatings = async (id) => {
+  const promise = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`)
+  return await promise.json()
+  //add error later
+}
