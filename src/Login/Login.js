@@ -27,7 +27,6 @@ class Login extends React.Component {
     if (result.error) {
       this.setState({password: "", email: "", badLogin: true});
     } else {
-      console.log("test2");
       this.props.toggleLogin(result.id, result.name);
       this.props.history.push("/");
     }
