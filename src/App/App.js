@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import {getAllMovies} from "../api";
+import {getAllMovies, getUserRatings} from "../api";
 
 import "./App.css";
 
@@ -19,6 +19,7 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       userId: 0,
+      userRatings: [],
       movies: [],
       error: "",
     };
@@ -32,12 +33,13 @@ class App extends Component {
       this.setState({error: movies.status});
     }
   }
-  toggleLogin = (id) => {
+  toggleLogin = async (id) => {
+    let ratings = await getUserRatings(id)
     this.setState({
       loggedIn: !this.state.loggedIn,
-      userId: id
+      userId: id,
+      userRatings: ratings.ratings
       });
-    console.log(this.state)
   };
 
   render() {
