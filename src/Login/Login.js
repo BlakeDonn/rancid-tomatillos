@@ -7,7 +7,7 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
-      badLogin: false,
+      badLogin: "",
     };
   }
   updateValue = (event) => {
@@ -19,17 +19,17 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    let promise = await postUserLogin(this.state)
-    promise = await promise.json()
-    this.resultHandler(promise);
-  }
-  resultHandler(result) {
-    if (result.error) {
-      this.setState({password: "", email: "", badLogin: true});
-    } else {
+    try {
+      const result = await postUserLogin(this.state);
+      if (result.error)
+        return this.setState({
+          password: "",
+          email: "",
+          badLogin: result.error,
+        });
       this.props.toggleLogin(result.id, result.name);
       this.props.history.push("/");
-    }
+    } catch (e) {}
   }
   //'marge@turing.io', password: 'password123'
   render() {
@@ -53,7 +53,7 @@ class Login extends React.Component {
           ></input>
           <button onClick={this.submitUserInfo}>Submit</button>
         </form>
-        {this.state.badLogin ? <h3>Incorrect Login</h3> : null}
+        {this.state.badLogin && <h3>Incorrect Login</h3>}
       </div>
     );
   }

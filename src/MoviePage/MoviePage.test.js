@@ -33,14 +33,13 @@ describe("MoviePage", () => {
         title: "Mulan",
       },
     });
-  it("Should show loading screen on click", async () => {
+  it("should mount with fetch data", async () => {
     render(
       <MemoryRouter>
         <MoviePage {...match} />
       </MemoryRouter>
     );
-    const idea = await waitFor(() => screen.getByText("Minutes"));
+    const idea = await waitFor(() => screen.getByText("minutes"));
     expect(idea).toBeInTheDocument();
-    screen.debug()
   });
 });

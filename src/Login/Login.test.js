@@ -2,19 +2,28 @@ import React from "react";
 import Login from "./Login.js";
 import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {getIdeas} from '../api';
+import {postUserLogin} from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
-
-jest.mock('../api.js');
+jest.mock("../api.js");
+postUserLogin.mockResolvedValueOnce()
 
 describe("Login", () => {
-  it("should render more details for one movie", () => {
-    render(
-      <Login />
-    );
+  it("Should render with inputs and submit button", () => {
+    render(<Login />);
     expect(screen.getByText("Enter User Details")).toBeInTheDocument();
-    // expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
-    // expect(screen.getByText("9")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("email")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("password")).toBeInTheDocument();
+    expect(screen.getByRole("button", {name: "Submit"})).toBeInTheDocument(
+      "test"
+    );
+  });
+  it("Should reflect bad login", async () => {
+    render(<Login />);
+    userEvent.type(screen.getByPlaceholderText("email"), "bad");
+    userEvent.type(screen.getByPlaceholderText("password"), "info");
+    userEvent.click(screen.getByRole("button", {name: "Submit"}));
+    const idea = await waitFor(() => screen.getByText("Incorrect Login"));
+    expect(idea).toBeInTheDocument()
   });
 });

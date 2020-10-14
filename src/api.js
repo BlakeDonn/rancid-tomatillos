@@ -2,27 +2,24 @@ export const getIndividualMovie = async (id, props) => {
   try {
     let promise = await fetch(
       `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
-    )
+    );
     return await promise.json();
   } catch (err) {
     props.history.push({
       pathname: "/error",
       state: {
-        error: err
-      }
-    })
+        error: err,
+      },
+    });
   }
-
-}
+};
 
 export const getAllMovies = async () => {
-  return fetch(
-    "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
-  );
-}
+  return fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies/");
+};
 
 export const postUserLogin = async (loginInfo) => {
-  return fetch(
+  const promise = await fetch(
     "https://rancid-tomatillos.herokuapp.com/api/v2/login",
     {
       method: "POST",
@@ -32,4 +29,5 @@ export const postUserLogin = async (loginInfo) => {
       body: JSON.stringify(loginInfo),
     }
   );
-}
+  return await promise.json();
+};
