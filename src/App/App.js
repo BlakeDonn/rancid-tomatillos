@@ -1,3 +1,4 @@
+
 import React, {Component} from "react";
 import {
   BrowserRouter as Router,
@@ -43,7 +44,7 @@ class App extends Component {
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
-            <Route path="/movie/:id" render={(props) => <MoviePage {...props} />} />
+            <Route path="/movie/:id" render={({match}) => <MoviePage {...match} />} />
             <Route
               path="/login"
               render={(props) => (
