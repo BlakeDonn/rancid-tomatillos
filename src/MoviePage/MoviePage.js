@@ -6,7 +6,6 @@ function MoviePage(props) {
 
   const initiateMovieFetch = async (id) => {
     let response = await getIndividualMovie(id);
-    await console.log(response)
     await props.history.push({
       pathname: "/movie",
       state: {
