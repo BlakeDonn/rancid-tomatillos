@@ -6,7 +6,8 @@ function MoviePage(props) {
 
   const initiateMovieFetch = async (id) => {
     let response = await getIndividualMovie(id);
-    props.history.push({
+    await console.log(response)
+    await props.history.push({
       pathname: "/movie",
       state: {
         movie: response.movie,
@@ -42,7 +43,7 @@ function MoviePage(props) {
       </div>
     );
   } else {
-    initiateMovieFetch(id, props)
+    initiateMovieFetch(id)
     return <h1>Loading</h1>;
   }
 }
