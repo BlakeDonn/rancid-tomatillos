@@ -4,17 +4,17 @@ import {getIndividualMovie} from "../api";
 class MoviePage extends Component {
   constructor(props) {
     super();
-    console.log(props);
     this.state = {
-      movie: [],
+      movie: {},
       error: "",
       movieId: props.params.id,
     };
   }
   async componentDidMount() {
     const response = await getIndividualMovie(this.state.movieId);
-    const movies = await response.movies;
-    this.setState({movies});
+    console.log(response)
+    const movie = await response.movie;
+    this.setState({movie});
   }
   render() {
     return (
