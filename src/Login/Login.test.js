@@ -28,19 +28,4 @@ describe("Login", () => {
     userEvent.click(screen.getByRole("button", {name: "Submit"}));
     expect(await screen.findByText(/Incorrect/i)).toBeInTheDocument();
   });
-  it("Should redirect on good login", async () => {
-    postUserLogin.mockReturnValue({
-      user: {id: 23, name: "testy", email: "t@esty"},
-    });
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>
-    );
-    userEvent.type(screen.getByPlaceholderText("email"), "good");
-    userEvent.type(screen.getByPlaceholderText("password"), "info");
-    userEvent.click(screen.getByRole("button", {name: "Submit"}));
-    expect(await screen.findByText(/Incorrect/i)).toBeInTheDocument();
-    screen.debug();
-  });
 });
