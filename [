@@ -4,14 +4,13 @@ import React from "react";
 import MoviePage from "./MoviePage";
 import {render, screen, waitFor} from "@testing-library/react";
 import {Route, MemoryRouter} from "react-router";
-import {Router, match} from "react-router-dom";
+import {Router, Match} from "react-router-dom";
 import {getIndividualMovie} from "../api.js";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
 
 describe("MoviePage", () => {
-  let match = {params: {id: 337401}, isExact: true, path: "", url: ""};
   getIndividualMovie.mockResolvedValueOnce([
     {
       average_rating: 3,
@@ -34,11 +33,16 @@ describe("MoviePage", () => {
   it("Should show loading screen on click", async () => {
     render(
       <MemoryRouter>
-        <MoviePage {...match} />
+        <Route
+          path="/movie/3"
+          render={({Match}) => <MoviePage {...Match} />}
+        />
       </MemoryRouter>
     );
-    const idea = await waitFor(() => screen.getByText("Minutes"));
-    expect(idea).toBeInTheDocument();
+    let screenTest = waitFor(() =>
+      screen.getByRole("heading", {name: "Mulan"})
+    );
     screen.debug()
+    expect(screenTest).toBeInTheDocument();
   });
 });

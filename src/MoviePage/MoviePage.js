@@ -6,21 +6,23 @@ class MoviePage extends Component {
     super();
     console.log(props);
     this.state = {
-      movie: {},
+      movie: [],
       error: "",
       movieId: props.params.id,
     };
   }
   async componentDidMount() {
     const response = await getIndividualMovie(this.state.movieId);
-    this.setState({movie: response.movie});
+    const movies = await response.movies;
+    this.setState({movies});
   }
   render() {
     return (
-      <div
-        itemID={this.state.movie.id}
-      >
-        <img src={this.state.movie.backdrop_path} alt={`backdrop of ${this.state.movie.title}`}></img>
+      <div itemID={this.state.movie.id}>
+        <img
+          src={this.state.movie.backdrop_path}
+          alt={`backdrop of ${this.state.movie.title}`}
+        ></img>
         <h3 className="movie-title">{this.state.movie.title}</h3>
         <p className="avg-rating">{this.state.movie.average_rating}</p>
         <p className="avg-rating">{this.state.movie.budget}</p>

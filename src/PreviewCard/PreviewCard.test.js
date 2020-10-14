@@ -13,7 +13,6 @@ describe("Card", () => {
   const historyMock = {push: fakeClick};
   beforeEach(() => {
     const history = createMemoryHistory();
-    history.push("/some/bad/route");
     render(
       <Router history={history}>
         <PreviewCard
@@ -23,7 +22,7 @@ describe("Card", () => {
           poster_path="testpath"
           release_date="test-date"
           title="Test Title"
-          history={historyMock}
+          history={history}
         />
       </Router>
     );
@@ -34,9 +33,10 @@ describe("Card", () => {
     expect(screen.getByText("9")).toBeInTheDocument();
   });
 
-  it("should invoke redirection to movie page with a movie's id", () => {
+  it("should call history push on click", () => {
     expect(screen.getByRole("button", {id: "9"}));
     userEvent.click(screen.getByRole("button", {id: "9"}));
     expect(fakeClick).toHaveBeenCalledTimes(1)
   });
+
 });
