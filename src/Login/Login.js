@@ -1,5 +1,5 @@
 import React from "react";
-import { postUserLogin } from "../api";
+import {postUserLogin} from "../api";
 
 class Login extends React.Component {
   constructor() {
@@ -7,7 +7,7 @@ class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
-      badLogin: false,
+      badLogin: "",
     };
   }
   updateValue = (event) => {
@@ -19,20 +19,19 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    let promise = await postUserLogin(this.state)
-    promise = await promise.json()
-    this.resultHandler(promise);
+    try {
+      const result = await postUserLogin(this.state);
+      if (result.error) {
+        return this.setState({
+          password: "",
+          email: "",
+          badLogin: result.error,
+        });
+      } else {
+        this.props.toggleLogin(result.id, result.name);
+      }
+    } catch (e) {}
   }
-  resultHandler(result) {
-    if (result.error) {
-      this.setState({password: "", email: "", badLogin: true});
-    } else {
-      console.log("test2");
-      this.props.toggleLogin(result.id, result.name);
-      this.props.history.push("/");
-    }
-  }
-  //'marge@turing.io', password: 'password123'
   render() {
     return (
       <div className="login-container">
@@ -52,9 +51,9 @@ class Login extends React.Component {
             onChange={this.updateValue}
             value={this.state.password}
           ></input>
-          <button onClick={this.submitUserInfo}>Enter User Details</button>
+          <button onClick={this.submitUserInfo}>Submit</button>
         </form>
-        {this.state.badLogin ? <h3>Incorrect Login</h3> : null}
+        {this.state.badLogin && <h3>Incorrect Login</h3>}
       </div>
     );
   }

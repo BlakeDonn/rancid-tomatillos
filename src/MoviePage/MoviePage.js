@@ -1,41 +1,41 @@
-import React from "react";
-import { getIndividualMovie } from '../api';
+import React, {Component} from "react";
+import {getIndividualMovie} from "../api";
 
-function MoviePage(props) {
-  let id = props.location.pathname.split("/")[2];
-  
-  if (props.match.isExact) {
-    console.log(props);
-    const {
-      average_rating,
-      backdrop_path,
-      budget,
-      genres,
-      id,
-      overview,
-      poster_path,
-      release_date,
-      revenue,
-      runtime,
-      tagline,
-      title,
-    } = props.location.state.movie;
+class MoviePage extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      movie: {},
+      error: "",
+      movieId: props.params.id,
+    };
+  }
+  async componentDidMount() {
+    const response = await getIndividualMovie(this.state.movieId);
+    console.log(response)
+    const movie = await response.movie;
+    this.setState({movie});
+  }
+  render() {
     return (
-      <div itemID={id} onMouseOver={console.log(overview)}>
-        <h1 className="movie-title">{title}</h1>
-        <img src={backdrop_path} alt={`${title} background`} />
-        <p className="average-rating"> Average user rating: {average_rating}</p>
-        <p className="genres"> {genres}</p>
-        <p className="release-date"> {release_date}</p>
-        <p className="revenue">{revenue ? revenue : "Not released"}</p>
-        <p className="runtime"> {runtime} minutes</p>
-        {budget && <p className="budget">{budget}</p>}
-        {tagline && <p className="tagline"> {tagline}</p>}
+      <div itemID={this.state.movie.id}>
+        <img
+          src={this.state.movie.backdrop_path}
+          alt={`backdrop of ${this.state.movie.title}`}
+        ></img>
+        <h3 className="movie-title">{this.state.movie.title}</h3>
+        <p className="avg-rating">{this.state.movie.average_rating}</p>
+        <p className="avg-rating">{this.state.movie.budget}</p>
+        <p className="avg-rating">{this.state.movie.genres}</p>
+        <p className="avg-rating">{this.state.movie.overview}</p>
+        <p className="avg-rating">{this.state.movie.release_date}</p>
+        <p className="avg-rating">{this.state.movie.revenue}</p>
+        <p className="avg-rating">{this.state.movie.runtime} minutes</p>
+        <p className="avg-rating">{this.state.movie.tagline}</p>
+        <p className="avg-rating">{this.state.movie.tagline}</p>
+        <p className="user-rating">"Your rating"</p>
       </div>
     );
-  } else {
-    getIndividualMovie(id, props);
-    return <h1>Loading</h1>;
   }
 }
 

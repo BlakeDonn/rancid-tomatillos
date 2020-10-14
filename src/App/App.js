@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import { getAllMovies } from "../api";
+import {getAllMovies} from "../api";
 
 import "./App.css";
 
@@ -23,14 +23,12 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const allMovies = await getAllMovies() 
-    console.log(allMovies)
-    if (allMovies.ok) {
-      let result = await allMovies.json();
-      console.log(result.movies);
-      this.setState({movies: result.movies});
+    const allMovies = await getAllMovies();
+    let movies = allMovies.movies
+    if (movies.length) {
+      this.setState({movies});
     } else {
-      this.setState({error: allMovies.status});
+      this.setState({error: movies.status});
     }
   }
   toggleLogin = (id) => {
@@ -43,12 +41,19 @@ class App extends Component {
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
-            <Route path="/movie" render={(props) => <MoviePage {...props} />} />
+            <Route
+              path="/movie/:id"
+              render={({match}) => <MoviePage {...match} />}
+            />
             <Route
               path="/login"
-              render={(props) => (
-                <Login {...props} toggleLogin={this.toggleLogin} />
-              )}
+              render={(props) =>
+                this.state.loggedIn ? (
+                  <Redirect to="/" />
+                ) : (
+                    <Login {...props} toggleLogin={this.toggleLogin} />
+                  )
+              }
             />
             <Route
               exact
