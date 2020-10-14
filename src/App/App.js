@@ -18,6 +18,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false,
+      userId: 0,
       movies: [],
       error: "",
     };
@@ -32,7 +33,11 @@ class App extends Component {
     }
   }
   toggleLogin = (id) => {
-    this.setState({loggedIn: !this.state.loggedIn});
+    this.setState({
+      loggedIn: !this.state.loggedIn,
+      userId: id
+      });
+    console.log(this.state)
   };
 
   render() {
