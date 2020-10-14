@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 import {
   BrowserRouter as Router,
@@ -24,8 +23,8 @@ class App extends Component {
     };
   }
   async componentDidMount() {
-    const allMovies = await getAllMovies()
-    console.log(allMovies)
+    const allMovies = await getAllMovies();
+    console.log(allMovies);
     if (allMovies.ok) {
       let result = await allMovies.json();
       console.log(result.movies);
@@ -44,12 +43,19 @@ class App extends Component {
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
-            <Route path="/movie/:id" render={({match}) => <MoviePage {...match} />} />
+            <Route
+              path="/movie/:id"
+              render={({match}) => <MoviePage {...match} />}
+            />
             <Route
               path="/login"
-              render={(props) => (
-                <Login {...props} toggleLogin={this.toggleLogin} />
-              )}
+              render={(props) =>
+                this.state.loggedIn ? (
+                  <Redirect to="/" />
+                ) : (
+                    <Login {...props} toggleLogin={this.toggleLogin} />
+                  )
+              }
             />
             <Route
               exact

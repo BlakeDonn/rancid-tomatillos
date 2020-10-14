@@ -1,4 +1,5 @@
 import React from "react";
+import {Redirect} from 'react-router-dom'
 import {postUserLogin} from "../api";
 
 class Login extends React.Component {
@@ -21,6 +22,7 @@ class Login extends React.Component {
   async postUserData() {
     try {
       const result = await postUserLogin(this.state);
+      console.log(result);
       if (result.error) {
         return this.setState({
           password: "",
@@ -29,7 +31,6 @@ class Login extends React.Component {
         });
       } else {
         this.props.toggleLogin(result.id, result.name);
-        this.props.history.push("/");
       }
     } catch (e) {}
   }
