@@ -6,7 +6,6 @@ import {postUserLogin} from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
-postUserLogin.mockResolvedValueOnce()
 
 describe("Login", () => {
   it("Should render with inputs and submit button", () => {
@@ -19,11 +18,14 @@ describe("Login", () => {
     );
   });
   it("Should reflect bad login", async () => {
+    postUserLogin.mockReturnValue({
+      error: "Username or password is incorrect",
+    });
     render(<Login />);
     userEvent.type(screen.getByPlaceholderText("email"), "bad");
     userEvent.type(screen.getByPlaceholderText("password"), "info");
     userEvent.click(screen.getByRole("button", {name: "Submit"}));
-    const idea = await waitFor(() => screen.getByText("Incorrect Login"));
-    expect(idea).toBeInTheDocument()
+    expect(await screen.findByText(/Incorrect/i)).toBeInTheDocument();
+    screen.debug();
   });
 });
