@@ -15,8 +15,10 @@ export const getIndividualMovie = async (id, props) => {
 };
 
 export const getAllMovies = async () => {
-  const promise = await fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies/");
-  return await promise.json()
+  const promise = await fetch(
+    "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
+  );
+  return await promise.json();
 };
 
 export const postUserLogin = async (loginInfo) => {
@@ -34,8 +36,10 @@ export const postUserLogin = async (loginInfo) => {
 };
 
 export const getUserRatings = async (id) => {
-  const promise = await fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`)
-  return await promise.json()
+  const promise = await fetch(
+    `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`
+  );
+  return await promise.json();
   //add error later
 };
 
@@ -52,19 +56,14 @@ export const postUserRating = async (id, userRating, movieId) => {
     }
   );
   return await promise.json();
-}
+};
 
 export const deleteUserRating = async (userId, ratingId) => {
-  console.log(userId, ratingId)
-  const promise = await fetch(
+  console.log(userId, ratingId);
+  fetch(
     `https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings/${ratingId}`,
     {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: {}
     }
-  )
-  return await promise.json()
-}
+  );
+};

@@ -58,7 +58,7 @@ class App extends Component {
         (rating) => rating.movie_id == movieId
       );
     }
-    deleteUserRating(ratedMovie.id);
+    deleteUserRating(this.state.userId, ratedMovie.id);
   };
   render() {
     return (
