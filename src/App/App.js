@@ -9,7 +9,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import {getAllMovies, getUserRatings} from "../api";
+import {getAllMovies, getUserRatings, postUserRating, deleteUserRating} from "../api";
 
 import "./App.css";
 
@@ -41,7 +41,18 @@ class App extends Component {
       userRatings: ratings.ratings
       });
   };
-
+  submitRating = async (e) => {
+    e.preventDefault()
+    console.log(this.state.userId)
+    const postRating = await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
+    console.log(postRating)
+  }
+  deleteRating = async (e) => {
+    e.preventDefault()
+    const ratedMovie = this.props.userRatings.find(rating => rating.movie_id === this.state.movie.id)
+    console.log(this.props.userRatings, this.state.movie.id)
+    await deleteUserRating(this.state.userId, ratedMovie.id)
+  }
   render() {
     return (
       <Router>
@@ -50,7 +61,7 @@ class App extends Component {
           <Switch>
             <Route
               path="/movie/:id"
-              render={({match}) => <MoviePage {...match} userId={this.state.userId} />}
+              render={({match}) => <MoviePage {...match} rateMovie={this.rateMovie} submitRating={this.submitRating} deleteRating={this.deleteRating}/>}
             />
             <Route
               path="/login"

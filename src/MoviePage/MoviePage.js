@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getIndividualMovie, postUserRating, deleteUserRating} from "../api";
+import {getIndividualMovie} from "../api";
 
 class MoviePage extends Component {
   constructor(props) {
@@ -22,11 +22,7 @@ class MoviePage extends Component {
   rateMovie = (e) => {
     const rating = parseInt(e.target.value)
     this.setState({userRating: rating})
-  }
-  submitRating = async (e) => {
-    e.preventDefault()
-    console.log(this.state.userId)
-    await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
+    console.log(this)
   }
   render() {
     return (
@@ -46,9 +42,10 @@ class MoviePage extends Component {
         <p>{this.state.movie.tagline}</p>
         <p>{this.state.movie.tagline}</p>
         <p className="user-rating">"Your rating": {this.state.userRating}</p>
+        <button onClick={this.props.deleteRating}>Delete Rating</button>
         <label>Rating this movie - 1(hate) - 10 (love)</label>
         <input onChange={this.rateMovie} type="number" min="1" max="10" required="required"></input>
-        <button onClick={this.submitRating}>Rate Movie</button>
+        <button onClick={this.props.submitRating}>Rate Movie</button>
       </div>
     );
   }
