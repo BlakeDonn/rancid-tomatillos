@@ -1,13 +1,16 @@
 import React, {Component} from "react";
-import {getIndividualMovie} from "../api";
+import {getIndividualMovie, postUserRating} from "../api";
 
 class MoviePage extends Component {
   constructor(props) {
-    super();
+    super(props);
+    console.log(this)
     this.state = {
       movie: {},
       error: "",
       movieId: props.params.id,
+      userRating: "Not yet rated",
+      userId: props.userId || null
     };
   }
   async componentDidMount() {
@@ -16,8 +19,15 @@ class MoviePage extends Component {
     const movie = await response.movie;
     this.setState({movie});
   }
-  rateMovie() {
-
+  rateMovie = (e) => {
+    const rating = parseInt(e.target.value)
+    this.setState({userRating: rating})
+  }
+  submitRating = async (e) => {
+    e.preventDefault()
+    console.log(this.state.userId)
+    await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
+    console.log('submittttt')
   }
   render() {
     return (
@@ -36,10 +46,10 @@ class MoviePage extends Component {
         <p>{this.state.movie.runtime} minutes</p>
         <p>{this.state.movie.tagline}</p>
         <p>{this.state.movie.tagline}</p>
-        <p className="user-rating">"Your rating"</p>
+        <p className="user-rating">"Your rating": {this.state.userRating}</p>
         <label>Rating this movie - 1(hate) - 10 (love)</label>
-        <input type="number" min="1" max="10" required="required"></input>
-        <button onClick={this.rateMovie}>Rate Movie</button>
+        <input onChange={this.rateMovie} type="number" min="1" max="10" required="required"></input>
+        <button onClick={this.submitRating}>Rate Movie</button>
       </div>
     );
   }

@@ -40,15 +40,15 @@ export const getUserRatings = async (id) => {
 };
 
 //removehardcoded bits
-export const postUserRating = async () => {
+export const postUserRating = async (id, userRating, movieId) => {
   const promise = await fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/users/84/ratings`,
+    `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({movie_id: 539885, rating: 5}),
+      body: JSON.stringify({movie_id: movieId, rating: userRating}),
     }
   );
   return await promise.json();
