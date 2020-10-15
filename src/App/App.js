@@ -62,7 +62,6 @@ class App extends Component {
       ratedMovie = this.state.userRatings.find(
         (rating) => parseInt(rating.movie_id) == parseInt(movieId)
       );
-      console.log(ratedMovie);
     }
     deleteUserRating(this.state.userId, ratedMovie.id);
   };

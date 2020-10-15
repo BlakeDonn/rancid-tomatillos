@@ -15,54 +15,74 @@ export const getIndividualMovie = async (id, props) => {
 };
 
 export const getAllMovies = async () => {
-  const promise = await fetch(
-    "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
-  );
-  return await promise.json();
+  try {
+    const promise = await fetch(
+      "https://rancid-tomatillos.herokuapp.com/api/v2/movies/"
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e;
+  }
 };
 
 export const postUserLogin = async (loginInfo) => {
-  const promise = await fetch(
-    "https://rancid-tomatillos.herokuapp.com/api/v2/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginInfo),
-    }
-  );
-  return await promise.json();
+  try {
+    const promise = await fetch(
+      "https://rancid-tomatillos.herokuapp.com/api/v2/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginInfo),
+      }
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e;
+  }
 };
 
 export const getUserRatings = async (id) => {
-  const promise = await fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`
-  );
-  return await promise.json();
-  //add error later
+  try {
+    const promise = await fetch(
+      `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`
+    );
+    return await promise.json();
+    //add error later
+  } catch (e) {
+    throw e;
+  }
 };
 
 //removehardcoded bits
 export const postUserRating = async (id, userRating, movieId) => {
-  const promise = await fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({movie_id: movieId, rating: userRating}),
-    }
-  );
-  return await promise.json();
+  try {
+    const promise = await fetch(
+      `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({movie_id: movieId, rating: userRating}),
+      }
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e;
+  }
 };
 
 export const deleteUserRating = async (userId, ratingId) => {
-  fetch(
-    `https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings/${ratingId}`,
-    {
-      method: "DELETE",
-    }
-  );
+  try {
+    fetch(
+      `https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings/${ratingId}`,
+      {
+        method: "DELETE",
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
 };
