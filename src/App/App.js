@@ -41,12 +41,7 @@ class App extends Component {
       userRatings: ratings.ratings
       });
   };
-  submitRating = async (e) => {
-    e.preventDefault()
-    console.log(this.state.userId)
-    const postRating = await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
-    console.log(postRating)
-  }
+
   deleteRating = async (e) => {
     e.preventDefault()
     const ratedMovie = this.props.userRatings.find(rating => rating.movie_id === this.state.movie.id)
@@ -61,7 +56,7 @@ class App extends Component {
           <Switch>
             <Route
               path="/movie/:id"
-              render={({match}) => <MoviePage {...match} rateMovie={this.rateMovie} submitRating={this.submitRating} deleteRating={this.deleteRating}/>}
+              render={({match}) => <MoviePage {...match} userId={this.state.userId} deleteRating={this.deleteRating}/>}
             />
             <Route
               path="/login"
