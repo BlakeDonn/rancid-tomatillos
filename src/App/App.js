@@ -38,6 +38,9 @@ class App extends Component {
       this.setState({error: movies.status});
     }
   }
+  componentDidUpdate() {
+    console.log("eeeet")
+  }
   toggleLogin = async (id) => {
     let ratings = await getUserRatings(id);
     this.setState({
@@ -104,6 +107,7 @@ class App extends Component {
                       {...props}
                       allMovies={this.state.movies}
                       userRatings={this.state.userRatings}
+                      update={this.componentDidUpdate}
                     />
                   )
               }
