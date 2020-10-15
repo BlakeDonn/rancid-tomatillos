@@ -59,8 +59,7 @@ export const postUserRating = async (id, userRating, movieId) => {
 };
 
 export const deleteUserRating = async (userId, ratingId) => {
-  console.log(userId, ratingId);
-  fetch(
+  return await fetch(
     `https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings/${ratingId}`,
     {
       method: "DELETE",
