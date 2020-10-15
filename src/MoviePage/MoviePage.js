@@ -16,8 +16,7 @@ class MoviePage extends Component {
   async componentDidMount() {
     const response = await getIndividualMovie(this.state.movieId);
     const movie = await response.movie;
-    let userRating = this.props.matchRating(this.props.params.id) || "Not yet rated"
-    this.setState({movie: movie, userRating: userRating.rating});
+    this.setState({movie});
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
@@ -26,19 +25,11 @@ class MoviePage extends Component {
   };
   submitRating = async (e) => {
     e.preventDefault();
-    const postRating = await postUserRating(
+    await postUserRating(
       this.state.userId,
       this.state.userRating,
       this.state.movie.id
     );
-    if (postRating.error) {
-      let shit = await this.props.deleteRating(this.state.movieId);
-      postUserRating(
-        this.state.userId,
-        this.state.userRating,
-        this.state.movie.id
-      );
-    }
   };
   deleteMovie = (e) => {
     console.log(this.state.movieId);
