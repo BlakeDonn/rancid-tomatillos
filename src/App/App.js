@@ -47,16 +47,18 @@ class App extends Component {
     });
   };
 
-  deleteRating = async (movieId) => {
-    let ratedMovie = this.state.userRatings.find(
-      (rating) => rating.movie_id === movieId
+  matchRating = (movieId) => {
+    let shit = this.state.userRatings.find(
+      (rating) => parseInt(rating.movie_id) === parseInt(movieId)
     );
+    return shit
+  };
+  deleteRating = async (movieId) => {
+    let ratedMovie = this.matchRating(movieId);
     if (!ratedMovie) {
       let ratings = await getUserRatings(this.state.userId);
       this.setState({userRatings: ratings.ratings});
-      ratedMovie = this.state.userRatings.find(
-        (rating) => rating.movie_id == movieId
-      );
+      ratedMovie = this.matchRating(movieId);
     }
     deleteUserRating(this.state.userId, ratedMovie.id);
   };
@@ -73,6 +75,7 @@ class App extends Component {
                   {...match}
                   userId={this.state.userId}
                   deleteRating={this.deleteRating}
+                  matchRating={this.matchRating}
                 />
               )}
               h

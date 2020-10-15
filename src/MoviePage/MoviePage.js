@@ -15,9 +15,9 @@ class MoviePage extends Component {
   }
   async componentDidMount() {
     const response = await getIndividualMovie(this.state.movieId);
-    console.log(response);
     const movie = await response.movie;
-    this.setState({movie});
+    let userRating = this.props.matchRating(this.props.params.id)
+    this.setState({movie: movie, userRating: userRating.rating});
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
@@ -31,12 +31,15 @@ class MoviePage extends Component {
       this.state.userRating,
       this.state.movie.id
     );
-    console.log(postRating)
+    console.log(postRating);
+    //if (postRating.error) {
+    // this.props.deleteRating(this.state.movieId);
+    //}
   };
   deleteMovie = (e) => {
-    e.preventDefault();
-    console.log(this.state.movieId)
+    console.log(this.state.movieId);
     this.props.deleteRating(this.state.movieId);
+    this.setState({userRating: "Not yet rated"});
   };
   render() {
     return (
