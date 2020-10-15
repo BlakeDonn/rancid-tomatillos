@@ -4,32 +4,40 @@ import {getIndividualMovie, postUserRating} from "../api";
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    console.log(this)
+    console.log(this);
     this.state = {
       movie: {},
       error: "",
       movieId: props.params.id,
       userRating: "Not yet rated",
-      userId: props.userId || null
+      userId: props.userId || null,
     };
   }
   async componentDidMount() {
     const response = await getIndividualMovie(this.state.movieId);
-    console.log(response)
+    console.log(response);
     const movie = await response.movie;
     this.setState({movie});
   }
   rateMovie = (e) => {
-    const rating = parseInt(e.target.value)
-    this.setState({userRating: rating})
-    console.log(this)
-  }
+    const rating = parseInt(e.target.value);
+    this.setState({userRating: rating});
+    console.log(this);
+  };
   submitRating = async (e) => {
-    e.preventDefault()
-    console.log(this.state.userId)
-    const postRating = await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
+    e.preventDefault();
+    const postRating = await postUserRating(
+      this.state.userId,
+      this.state.userRating,
+      this.state.movie.id
+    );
     console.log(postRating)
-  }
+  };
+  deleteMovie = (e) => {
+    e.preventDefault();
+    console.log(this.state.movieId)
+    this.props.deleteRating(this.state.movieId);
+  };
   render() {
     return (
       <div itemID={this.state.movie.id}>
@@ -48,9 +56,15 @@ class MoviePage extends Component {
         <p>{this.state.movie.tagline}</p>
         <p>{this.state.movie.tagline}</p>
         <p className="user-rating">"Your rating": {this.state.userRating}</p>
-        <button onClick={this.props.deleteRating}>Delete Rating</button>
+        <button onClick={this.deleteMovie}>Delete Rating</button>
         <label>Rating this movie - 1(hate) - 10 (love)</label>
-        <input onChange={this.rateMovie} type="number" min="1" max="10" required="required"></input>
+        <input
+          onChange={this.rateMovie}
+          type="number"
+          min="1"
+          max="10"
+          required="required"
+        ></input>
         <button onClick={this.submitRating}>Rate Movie</button>
       </div>
     );

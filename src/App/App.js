@@ -9,7 +9,12 @@ import Dashboard from "../Dashboard/Dashboard";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
-import {getAllMovies, getUserRatings, postUserRating, deleteUserRating} from "../api";
+import {
+  getAllMovies,
+  getUserRatings,
+  postUserRating,
+  deleteUserRating,
+} from "../api";
 
 import "./App.css";
 
@@ -26,7 +31,7 @@ class App extends Component {
   }
   async componentDidMount() {
     const allMovies = await getAllMovies();
-    let movies = allMovies.movies
+    let movies = allMovies.movies;
     if (movies.length) {
       this.setState({movies});
     } else {
@@ -34,20 +39,27 @@ class App extends Component {
     }
   }
   toggleLogin = async (id) => {
-    let ratings = await getUserRatings(id)
+    let ratings = await getUserRatings(id);
     this.setState({
       loggedIn: !this.state.loggedIn,
       userId: id,
-      userRatings: ratings.ratings
-      });
+      userRatings: ratings.ratings,
+    });
   };
 
-  deleteRating = async (e) => {
-    e.preventDefault()
-    const ratedMovie = this.props.userRatings.find(rating => rating.movie_id === this.state.movie.id)
-    console.log(this.props.userRatings, this.state.movie.id)
-    await deleteUserRating(this.state.userId, ratedMovie.id)
-  }
+  deleteRating = async (movieId) => {
+    let ratedMovie = this.state.userRatings.find(
+      (rating) => rating.movie_id === movieId
+    );
+    if (!ratedMovie) {
+      let ratings = await getUserRatings(this.state.userId);
+      this.setState({userRatings: ratings.ratings});
+      ratedMovie = this.state.userRatings.find(
+        (rating) => rating.movie_id == movieId
+      );
+    }
+    deleteUserRating(ratedMovie.id);
+  };
   render() {
     return (
       <Router>
@@ -56,7 +68,14 @@ class App extends Component {
           <Switch>
             <Route
               path="/movie/:id"
-              render={({match}) => <MoviePage {...match} userId={this.state.userId} deleteRating={this.deleteRating}/>}
+              render={({match}) => (
+                <MoviePage
+                  {...match}
+                  userId={this.state.userId}
+                  deleteRating={this.deleteRating}
+                />
+              )}
+              h
             />
             <Route
               path="/login"
@@ -75,7 +94,11 @@ class App extends Component {
                 this.state.error > 400 ? (
                   <Redirect to="/error" />
                 ) : (
-                    <Dashboard {...props} allMovies={this.state.movies} userRatings={this.state.userRatings} />
+                    <Dashboard
+                      {...props}
+                      allMovies={this.state.movies}
+                      userRatings={this.state.userRatings}
+                    />
                   )
               }
             />

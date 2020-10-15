@@ -58,9 +58,10 @@ export const deleteUserRating = async (userId, ratingId) => {
   console.log(userId, ratingId)
   const promise = await fetch(
     `https://rancid-tomatillos.herokuapp.com/api/v2/users/${userId}/ratings/${ratingId}`,
-    { method: "DELETE",
+    {
+      method: "DELETE",
       headers: {
-      "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: {}
     }
