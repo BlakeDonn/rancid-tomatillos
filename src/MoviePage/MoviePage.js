@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getIndividualMovie, postUserRating} from "../api";
+import {getIndividualMovie, postUserRating, deleteUserRating} from "../api";
 
 class MoviePage extends Component {
   constructor(props) {
@@ -27,7 +27,6 @@ class MoviePage extends Component {
     e.preventDefault()
     console.log(this.state.userId)
     await postUserRating(this.state.userId, this.state.userRating, this.state.movie.id)
-    console.log('submittttt')
   }
   render() {
     return (
