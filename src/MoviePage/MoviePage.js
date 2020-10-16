@@ -10,6 +10,7 @@ class MoviePage extends Component {
       error: "",
       movieId: props.params.id,
       userRating: "Not yet rated",
+      displayedRating: 0,
       userId: typeof props.userId === "number" ? props.userId : null,
     };
   }
@@ -29,14 +30,14 @@ class MoviePage extends Component {
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
-    this.setState({userRating: rating});
+    this.setState({displayedRating: rating});
     console.log(this);
   };
   submitRating = async (e) => {
     e.preventDefault();
     let response = await postUserRating(
       this.state.userId,
-      this.state.userRating,
+      this.state.displayedRating,
       this.state.movie.id
     );
     if (response.error) {
@@ -47,9 +48,9 @@ class MoviePage extends Component {
         this.deleteMovie();
       }
     }
+    this.setState({userRating: this.state.displayedRating})
   };
   deleteMovie = () => {
-    console.log(this.state.movieId);
     this.props.deleteRating(this.state.movieId);
     this.setState({userRating: "Not yet rated"});
   };
