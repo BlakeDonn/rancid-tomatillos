@@ -14,9 +14,18 @@ class MoviePage extends Component {
     };
   }
   async componentDidMount() {
+    let userRating;
+    if (this.state.userId) {
+      userRating = this.props.userRatings.find(
+        (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
+      );
+      if (userRating) {
+        userRating = userRating.rating
+      }
+    }
     const response = await getIndividualMovie(this.state.movieId);
     const movie = await response.movie;
-    this.setState({movie});
+    this.setState({movie, userRating});
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
@@ -31,9 +40,11 @@ class MoviePage extends Component {
       this.state.movie.id
     );
     if (response.error) {
-      let userInput = window.confirm("You allready have a rating for this movie, would you like to delete it?")
+      let userInput = window.confirm(
+        "You allready have a rating for this movie, would you like to delete it?"
+      );
       if (userInput) {
-        this.deleteMovie()
+        this.deleteMovie();
       }
     }
   };
@@ -62,9 +73,8 @@ class MoviePage extends Component {
           <div>
             <p className="user-rating">
               {this.state.userRating
-                ? "Seen this Movie? Leave a rating!"
-                : this.state.userRating}
-
+                ? `Your Current Rating ${this.state.userRating}`
+                : "Seen this Movie? Leave a rating!"}
             </p>
             {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
             <label>Rating this movie - 1(hate) - 10 (love)</label>
