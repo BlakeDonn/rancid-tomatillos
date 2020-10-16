@@ -28,11 +28,17 @@ class MoviePage extends Component {
   };
   submitRating = async (e) => {
     e.preventDefault();
-    await postUserRating(
+    let response = await postUserRating(
       this.state.userId,
       this.state.userRating,
       this.state.movie.id
     );
+    if (response.error) {
+      let userInput = window.confirm("You allready have a rating for this movie, would you like to delete it?")
+      if (userInput) {
+        this.deleteMovie()
+      }
+    }
   };
   deleteMovie = () => {
     console.log(this.state.movieId);
