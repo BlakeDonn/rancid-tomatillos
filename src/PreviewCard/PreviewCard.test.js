@@ -33,10 +33,10 @@ describe("Card", () => {
     expect(screen.getByText("9")).toBeInTheDocument();
   });
 
-  it("should call history push on click", () => {
-    expect(screen.getByRole("button", {id: "9"}));
-    userEvent.click(screen.getByRole("button", {id: "9"}));
-    expect(fakeClick).toHaveBeenCalledTimes(1)
-  });
+  // it("should call history push on click", () => {
+  //   expect(screen.getByRole("button", {id: "9"}));
+  //   userEvent.click(screen.getByRole("button", {id: "9"}));
+  //   expect(fakeClick).toHaveBeenCalledTimes(1)
+  // });
 
 });
