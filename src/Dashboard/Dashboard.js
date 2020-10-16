@@ -7,6 +7,7 @@ function Dashboard(props) {
       <CardsContainer
         history={props.history}
         movies={props.allMovies}
+        userRatings={props.userRatings}
       />
     </main>
   );

@@ -28,7 +28,7 @@ class Login extends React.Component {
           badLogin: result.error,
         });
       } else {
-        this.props.toggleLogin(result.id, result.name);
+        this.props.toggleLogin(result.user.id);
       }
     } catch (e) {}
   }

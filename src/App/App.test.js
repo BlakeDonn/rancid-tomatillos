@@ -28,6 +28,7 @@ describe("App", () => {
     render(<App />);
     const idea = await waitFor(() => screen.getByText("Money Plane"));
     expect(idea).toBeInTheDocument()
+    screen.debug()
   });
   it("User is redirected to login page on link click", async () => {
     const history = createMemoryHistory();
