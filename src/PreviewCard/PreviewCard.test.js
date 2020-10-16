@@ -31,6 +31,7 @@ describe("Card", () => {
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
     expect(screen.getByText("9")).toBeInTheDocument();
+    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   // it("should call history push on click", () => {
