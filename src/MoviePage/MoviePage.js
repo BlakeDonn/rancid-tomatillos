@@ -18,9 +18,6 @@ class MoviePage extends Component {
     const movie = await response.movie;
     this.setState({movie});
   }
-  async componentDidUpdate() {
-    console.log(this.state.userId);
-  }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
     this.setState({userRating: rating});
@@ -67,9 +64,9 @@ class MoviePage extends Component {
               {this.state.userRating
                 ? "Seen this Movie? Leave a rating!"
                 : this.state.userRating}
-              }
+
             </p>
-            <button onClick={this.deleteMovie}>Delete Rating</button>
+            {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
             <label>Rating this movie - 1(hate) - 10 (love)</label>
             <input
               onChange={this.rateMovie}
