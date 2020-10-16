@@ -48,8 +48,7 @@ class MoviePage extends Component {
       } else {
         this.setState({userRating: this.state.displayedRating});
       }
-    }
-    else {
+    } else {
       this.setState({userRating: this.state.displayedRating});
     }
 
@@ -93,7 +92,9 @@ class MoviePage extends Component {
             ></input>
             <button onClick={this.submitRating}>Rate Movie</button>
           </div>
-        ) : null}
+        ) : (
+            <p>Login to rate movies</p>
+          )}
       </div>
     );
   }
