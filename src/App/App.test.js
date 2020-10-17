@@ -37,7 +37,9 @@ describe("Header", () => {
 
     expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
     expect(screen.getByText('Home')).toBeInTheDocument();
-    expect(screen.getByRole('link', {name: /login/})).toBeInTheDocument();
+    expect(screen.getByText('Login').closest('a')).toHaveAttribute('href', '/login')
+    screen.debug()
+
   })
 })
 
