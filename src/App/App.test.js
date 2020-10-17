@@ -30,18 +30,20 @@ describe("App", () => {
   
   describe("Header", () => {
   //afterEach(cleanup) cleans DOM - not stubs created using data "retrieved" from jest.mock
-  
+    
     it("Should have a header with links", () => {
       render (
       <MemoryRouter>
         <App />
       </MemoryRouter>
       )
-  
+      
       expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
       expect(screen.getByText('Home')).toBeInTheDocument();
-      expect(screen.getByRole('link', {name: /Login/})).toBeInTheDocument();
-      expect(screen.getByRole('link', {name: /Login/}).href).toBe('http://localhost/login');
+//refactor login regex
+      const loginLink = screen.getByRole('link', {name: /login/i})
+      expect(loginLink).toBeInTheDocument();
+      expect(loginLink.href).toMatch(/login/i);
 
     })
   })
