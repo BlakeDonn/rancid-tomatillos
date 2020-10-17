@@ -1,10 +1,10 @@
 import React from "react";
 import App from "./App";
-import {render, screen, waitFor, cleanup} from "@testing-library/react";
+import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import {Router, MemoryRouter } from "react-router-dom";
-import {createMemoryHistory} from "history";
-import {getAllMovies} from "../api";
+import { Router, MemoryRouter } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import { getAllMovies } from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
@@ -41,6 +41,8 @@ describe("App", () => {
       expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
       expect(screen.getByText('Home')).toBeInTheDocument();
       expect(screen.getByRole('link', {name: /Login/})).toBeInTheDocument();
+      expect(screen.getByRole('link', {name: /Login/}).href).toBe('http://localhost/login');
+
     })
   })
   
