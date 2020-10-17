@@ -9,23 +9,25 @@ import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
 
-describe("Header", () => {
+// needs to get called each time you call "getAllMovies" within App 
+getAllMovies.mockResolvedValue({
+  movies: [
+    {
+      average_rating: 6.8,
+      backdrop_path:
+        "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
+      id: 694919,
+      poster_path:
+        "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+      release_date: "2020-09-29",
+      title: "Money Plane",
+    },
+  ],
+});
 
-  getAllMovies.mockResolvedValueOnce({
-    movies: [
-      {
-        average_rating: 6.8,
-        backdrop_path:
-          "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
-        id: 694919,
-        poster_path:
-          "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-        release_date: "2020-09-29",
-        title: "Money Plane",
-      },
-    ],
-  });
-  
+describe("Header", () => {
+//afterEach(cleanup) cleans DOM - not stubs created using data "retrieved" from jest.mock
+
   it("Should have a header with links", () => {
     render (
     <MemoryRouter>
@@ -35,27 +37,11 @@ describe("Header", () => {
 
     expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
     expect(screen.getByText('Home')).toBeInTheDocument();
-    screen.debug()
-    // expect(screen.getByRole('link', {name: /login/})).toBeInTheDocument();
+    expect(screen.getByRole('link', {name: /login/})).toBeInTheDocument();
   })
 })
 
 describe("Dashboard", () => {
-
-  getAllMovies.mockResolvedValueOnce({
-    movies: [
-      {
-        average_rating: 6.8,
-        backdrop_path:
-          "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
-        id: 694919,
-        poster_path:
-          "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-        release_date: "2020-09-29",
-        title: "Money Plane",
-      },
-    ],
-  });
 
   it("Should load movies on mount", async () => {
     render(<App />);
