@@ -1,5 +1,4 @@
 export const getIndividualMovie = async (id, props) => {
-  console.log('yooohooo')
   try {
     let promise = await fetch(
       `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
@@ -51,7 +50,6 @@ export const getUserRatings = async (id) => {
   }
 };
 
-//removehardcoded bits
 export const postUserRating = async (id, userRating, movieId) => {
   try {
     const promise = await fetch(
