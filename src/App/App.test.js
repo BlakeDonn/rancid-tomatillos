@@ -2,8 +2,7 @@ import React from "react";
 import App from "./App";
 import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { Router, MemoryRouter } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter } from "react-router-dom";
 import { getAllMovies, getIndividualMovie, postUserLogin, getUserRatings } from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
@@ -157,9 +156,7 @@ describe("App", () => {
        userEvent.type(screen.getByPlaceholderText("email"), "marge@turing.io");
        userEvent.type(screen.getByPlaceholderText("password"), "password123");
        userEvent.click(screen.getByRole("button", {name: "Submit"}));
-       await waitFor(() => screen.debug())
-
-       expect(screen.getByText("Logout")).toBeInTheDocument()
+       await waitFor(() => expect(screen.getByText("Logout")).toBeInTheDocument())
        expect(screen.getByText("Your rating: 3")).toBeInTheDocument()
     })
 
