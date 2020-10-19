@@ -38,9 +38,6 @@ class App extends Component {
       this.setState({error: movies.status});
     }
   }
-  componentDidUpdate() {
-    console.log("eeeet")
-  }
   toggleLogin = async (id) => {
     let ratings = await getUserRatings(id);
     this.setState({
@@ -50,23 +47,26 @@ class App extends Component {
     });
   };
 
-  matchRating = (movieId) => {
+  matchRating = (movieId, userRatings) => {
+    let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
     if (this.loggedIn) {
-      return this.state.userRatings.find(
+      return ratingsToSearch.find(
         (rating) => parseInt(rating.movie_id) === parseInt(movieId)
       );
     }
   };
   deleteRating = async (movieId) => {
     let ratedMovie = this.matchRating(movieId);
+    console.log(ratedMovie)
     if (!ratedMovie) {
       let ratings = await getUserRatings(this.state.userId);
+      console.log(ratings)
       this.setState({userRatings: ratings.ratings});
       ratedMovie = this.state.userRatings.find(
         (rating) => parseInt(rating.movie_id) == parseInt(movieId)
       );
+      deleteUserRating(this.state.userId, ratedMovie.id)
     }
-    deleteUserRating(this.state.userId, ratedMovie.id);
   };
   render() {
     return (
