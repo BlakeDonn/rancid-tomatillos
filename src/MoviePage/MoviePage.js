@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {getIndividualMovie, postUserRating} from "../api";
+import "./MoviePage.css";
 
 class MoviePage extends Component {
   constructor(props) {
