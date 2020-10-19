@@ -97,21 +97,12 @@ class App extends Component {
                   )
               }
             />
-            <Route
-              exact
-              path="/"
-              render={(props) =>
-                this.state.error > 400 ? (
-                  <Redirect to="/error" />
-                ) : (
-                    <CardsContainer
-                      allMovies={this.state.movies}
-                      userRatings={this.state.userRatings}
-                      update={this.componentDidUpdate}
-                    />
-                  )
-              }
-            />
+            <Route exact path="/">
+              <CardsContainer
+                allMovies={this.state.movies}
+                userRatings={this.state.userRatings}
+                update={this.componentDidUpdate} />
+            </Route>
           </Switch>
         </div>
       </>
