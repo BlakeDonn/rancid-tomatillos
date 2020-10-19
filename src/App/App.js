@@ -69,8 +69,7 @@ class App extends Component {
   };
   render() {
     return (
-      <Router>
-        {/*replace Router with <> or <div>*/}
+      <>
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
@@ -114,7 +113,7 @@ class App extends Component {
             />
           </Switch>
         </div>
-      </Router>
+      </>
     );
   }
 }
