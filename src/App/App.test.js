@@ -25,6 +25,25 @@ describe("App", () => {
         },
       ],
     });
+
+    getIndividualMovie.mockResolvedValue(
+      { "movie": {
+        "id": 694919,
+        "title": "Money Plane",
+        "poster_path": "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+        "backdrop_path": "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
+        "release_date": "2020-09-29",
+        "overview": "A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
+        "genres": [
+          "Action"
+        ],
+        "budget": 0,
+        "revenue": 0,
+        "runtime": 82,
+        "tagline": "",
+        "average_rating": 4.75
+      } }
+    )
   })
   
   describe("Header", () => {
@@ -81,24 +100,7 @@ describe("App", () => {
     //quick fix: 
     //best practice take out router in app component + make sure render app in test -> wrapped in <Router history={history}
     it("Should route to a page with more movie details", async () => {
-      getIndividualMovie.mockResolvedValue(
-        { "movie": {
-          "id": 694919,
-          "title": "Money Plane",
-          "poster_path": "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-          "backdrop_path": "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
-          "release_date": "2020-09-29",
-          "overview": "A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
-          "genres": [
-            "Action"
-          ],
-          "budget": 0,
-          "revenue": 0,
-          "runtime": 82,
-          "tagline": "",
-          "average_rating": 4.75
-        } }
-      )
+
       render(
       <MemoryRouter>
         <App />
@@ -107,9 +109,9 @@ describe("App", () => {
       expect(movieTitle).toBeInTheDocument()
       userEvent.click(screen.getByRole('link', {name: /money plane/i}))
       await waitFor(() => expect(screen.getByText("Runtime: 82 minutes")).toBeInTheDocument())
-
     })
- 
+
+    
   });
 })
 
