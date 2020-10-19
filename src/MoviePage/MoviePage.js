@@ -72,19 +72,19 @@ class MoviePage extends Component {
             alt={`backdrop of ${this.state.movie.title}`}
           ></img>
           <h3 className="movie-title">{this.state.movie.title}</h3>
-          <p>{this.state.movie.tagline}</p>
-          <p>Average Rating: {averageRating}</p>
+          <p className="movie-tagline">{this.state.movie.tagline}</p>
+          <p>Summary: {this.state.movie.overview}</p>
           <div>
             <h4>Genres:</h4>
             <ul>
               {this.state.movie.genres.map(genre => (
                 <li>{genre}</li>
-              ))}
+                ))}
             </ul>
           </div>
-          <p>Summary: {this.state.movie.overview}</p>
           <p>Release Date: {this.state.movie.release_date}</p>
           <p>Runtime: {this.state.movie.runtime} minutes</p>
+          <p>Average Rating: {averageRating}</p>
           {this.state.userId ? (
             <div>
               <p className="user-rating">
@@ -104,7 +104,7 @@ class MoviePage extends Component {
               <button onClick={this.submitRating}>Rate Movie</button>
             </div>
           ) : (
-              <p>Login to rate movies</p>
+              <p>Log into your account to rate movies</p>
             )}
         </div>
       );
