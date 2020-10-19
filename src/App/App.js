@@ -6,10 +6,10 @@ import {
   Redirect,
 } from "react-router-dom";
 import CardsContainer from "../CardsContainer/CardsContainer";
-
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import {
   getAllMovies,
   getUserRatings,
@@ -97,6 +97,8 @@ class App extends Component {
                 userRatings={this.state.userRatings}
                 update={this.componentDidUpdate} />
             </Route>
+            <Route exact path="/error" component={ErrorPage} />
+            <Redirect to="/error" />
           </Switch>
         </div>
       </>
