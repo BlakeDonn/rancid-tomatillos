@@ -1,7 +1,7 @@
 import React from "react";
 import MoviePage from "./MoviePage";
 import {render, screen, waitFor} from "@testing-library/react";
-import {Route, MemoryRouter} from "react-router";
+import {MemoryRouter} from "react-router";
 import {Router, match} from "react-router-dom";
 import {getIndividualMovie} from "../api.js";
 import "@testing-library/jest-dom/extend-expect";
@@ -37,7 +37,7 @@ describe("MoviePage", () => {
         <MoviePage {...match} />
       </MemoryRouter>
     );
-    const idea = await waitFor(() => screen.getByText("minutes"));
+    const idea = await waitFor(() => screen.getByText("Runtime: 115 minutes"));
     expect(idea).toBeInTheDocument();
   });
 });

@@ -114,3 +114,9 @@ class MoviePage extends Component {
 }
 
 export default MoviePage;
+
+
+//TESTING
+//1. initial render? does it appear correctly?
+//2. do things work as intended? e.g. Login click event (in Login.test.js) - can click -> was fetch request called?
+//3. does it return correct value - correct values for

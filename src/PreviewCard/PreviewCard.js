@@ -1,4 +1,5 @@
 import React from "react";
+//import router and link
 
 const PreviewCard = ({
   history,
@@ -10,12 +11,13 @@ const PreviewCard = ({
 }) => {
   const averageRating = Math.round(average_rating * 10) / 10
   return (
-    <div
+    <div /*Link*/
       itemID={id}
       className="preview-card"
       tabIndex="0"
       role="button"
       onClick={() => history.push(`movie/${id}`)}
+      // instead of div change to Link and remove onClick and onKeyPress
       onKeyPress={() => history.push(`movie/${id}`)}
     >
       <img src={poster_path} alt={`poster of ${title}`}></img>

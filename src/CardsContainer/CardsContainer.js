@@ -17,3 +17,6 @@ function CardsContainer(props) {
 }
 
 export default CardsContainer;
+
+
+//replace dashboard with cardscontainer (delete one--redundant)

@@ -35,7 +35,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login-container">
-        <form clasName="login-form">
+        <form className="login-form">
           <h1>Enter User Details</h1>
           <input
             placeholder="email"
