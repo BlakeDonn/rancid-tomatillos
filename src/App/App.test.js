@@ -52,8 +52,8 @@ describe("App", () => {
   
     it("Should load movies on mount", async () => {
       render(<App />);
-      const idea = await waitFor(() => screen.getByText("Money Plane"));
-      expect(idea).toBeInTheDocument()
+      const movieTitle = await waitFor(() => screen.getByText("Money Plane"));
+      expect(movieTitle).toBeInTheDocument()
     });
   
     it("User is redirected to login page on link click", async () => {
