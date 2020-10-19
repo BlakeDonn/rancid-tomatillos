@@ -4,13 +4,8 @@ export const getIndividualMovie = async (id, props) => {
       `https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`
     );
     return await promise.json();
-  } catch (err) {
-    props.history.push({
-      pathname: "/error",
-      state: {
-        error: err,
-      },
-    });
+  } catch (e) {
+    throw e
   }
 };
 
@@ -49,13 +44,11 @@ export const getUserRatings = async (id) => {
       `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`
     );
     return await promise.json();
-    //add error later
   } catch (e) {
     throw e;
   }
 };
 
-//removehardcoded bits
 export const postUserRating = async (id, userRating, movieId) => {
   try {
     const promise = await fetch(

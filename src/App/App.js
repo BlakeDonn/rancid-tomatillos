@@ -5,14 +5,14 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
+import CardsContainer from "../CardsContainer/CardsContainer";
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import {
   getAllMovies,
   getUserRatings,
-  postUserRating,
   deleteUserRating,
 } from "../api";
 
@@ -69,8 +69,12 @@ class App extends Component {
     }
   };
   render() {
+    const logged = this.state.loggedIn ? (
+      <Redirect to="/" />
+    ) : ( <Login toggleLogin={this.toggleLogin} />
+    )
     return (
-      <Router>
+      <>
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <div className="page-container">
           <Switch>
@@ -86,35 +90,18 @@ class App extends Component {
               )}
               h
             />
-            <Route
-              path="/login"
-              render={(props) =>
-                this.state.loggedIn ? (
-                  <Redirect to="/" />
-                ) : (
-                    <Login {...props} toggleLogin={this.toggleLogin} />
-                  )
-              }
-            />
-            <Route
-              exact
-              path="/"
-              render={(props) =>
-                this.state.error > 400 ? (
-                  <Redirect to="/error" />
-                ) : (
-                    <Dashboard
-                      {...props}
-                      allMovies={this.state.movies}
-                      userRatings={this.state.userRatings}
-                      update={this.componentDidUpdate}
-                    />
-                  )
-              }
-            />
+            <Route exact path="/login">{logged}</Route>
+            <Route exact path="/">
+              <CardsContainer
+                allMovies={this.state.movies}
+                userRatings={this.state.userRatings}
+                update={this.componentDidUpdate} />
+            </Route>
+            <Route exact path="/error" component={ErrorPage} />
+            <Redirect to="/error" />
           </Switch>
         </div>
-      </Router>
+      </>
     );
   }
 }

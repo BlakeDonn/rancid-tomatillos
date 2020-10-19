@@ -4,9 +4,8 @@ import {getIndividualMovie, postUserRating} from "../api";
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
-      movie: {},
+      movie: null,
       error: "",
       movieId: props.params.id,
       userRating: "Not yet rated",
@@ -19,9 +18,9 @@ class MoviePage extends Component {
     if (this.state.userId) {
       userRating = this.props.userRatings.find(
         (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
-      );
-      if (userRating) {
-        userRating = userRating.rating;
+        );
+        if (userRating) {
+          userRating = userRating.rating;
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
@@ -41,7 +40,7 @@ class MoviePage extends Component {
     );
     if (response.error) {
       let userInput = window.confirm(
-        "You allready have a rating for this movie, would you like to delete it?"
+        "You already have a rating for this movie, would you like to delete it?"
       );
       if (userInput) {
         this.deleteMovie();
@@ -59,45 +58,62 @@ class MoviePage extends Component {
     this.setState({userRating: "Not yet rated"});
   };
   render() {
-    return (
-      <div itemID={this.state.movie.id}>
-        <img
-          src={this.state.movie.backdrop_path}
-          alt={`backdrop of ${this.state.movie.title}`}
-        ></img>
-        <h3 className="movie-title">{this.state.movie.title}</h3>
-        <p>{this.state.movie.average_rating}</p>
-        <p>{this.state.movie.budget}</p>
-        <p>{this.state.movie.genres}</p>
-        <p>{this.state.movie.overview}</p>
-        <p>{this.state.movie.release_date}</p>
-        <p>{this.state.movie.revenue}</p>
-        <p>{this.state.movie.runtime} minutes</p>
-        <p>{this.state.movie.tagline}</p>
-        {this.state.userId ? (
+    if (this.state.movie === null) {
+      return (<p>Loading</p>)
+    } else {
+      const averageRating = Math.round(this.state.movie.average_rating * 10) / 10
+      return (
+        <div itemID={this.state.movie.id}>
+          <img
+            src={this.state.movie.backdrop_path}
+            alt={`backdrop of ${this.state.movie.title}`}
+          ></img>
+          <h3 className="movie-title">{this.state.movie.title}</h3>
+          <p className="movie-tagline">{this.state.movie.tagline}</p>
+          <p>Summary: {this.state.movie.overview}</p>
           <div>
-            <p className="user-rating">
-              {this.state.userRating
-                ? `Your Current Rating ${this.state.userRating}`
-                : "Seen this Movie? Leave a rating!"}
-            </p>
-            {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
-            <label>Rating this movie - 1(hate) - 10 (love)</label>
-            <input
-              onChange={this.rateMovie}
-              type="number"
-              min="1"
-              max="10"
-              required="required"
-            ></input>
-            <button onClick={this.submitRating}>Rate Movie</button>
+            <h4>Genres:</h4>
+            <ul>
+              {this.state.movie.genres.map(genre => (
+                <li>{genre}</li>
+                ))}
+            </ul>
           </div>
-        ) : (
-            <p>Login to rate movies</p>
-          )}
-      </div>
-    );
+          <p>Release Date: {this.state.movie.release_date}</p>
+          <p>Runtime: {this.state.movie.runtime} minutes</p>
+          <p>Average Rating: {averageRating}</p>
+          {this.state.userId ? (
+            <div>
+              <p className="user-rating">
+                {this.state.userRating
+                  ? `Your Current Rating ${this.state.userRating}`
+                  : "Seen this Movie? Leave a rating!"}
+              </p>
+              {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
+              <label>Rating this movie - 1(hate) - 10 (love)</label>
+              <input
+                onChange={this.rateMovie}
+                type="number"
+                min="1"
+                max="10"
+                required="required"
+              ></input>
+              <button onClick={this.submitRating}>Rate Movie</button>
+            </div>
+          ) : (
+              <p>Log into your account to rate movies</p>
+            )}
+        </div>
+      );
+    }
+    
   }
 }
 
 export default MoviePage;
+
+
+//TESTING
+//1. initial render? does it appear correctly?
+//2. do things work as intended? e.g. Login click event (in Login.test.js) - can click -> was fetch request called?
+//3. does it return correct value - correct values for

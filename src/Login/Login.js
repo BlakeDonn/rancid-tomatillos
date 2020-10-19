@@ -10,6 +10,7 @@ class Login extends React.Component {
       badLogin: "",
     };
   }
+  
   updateValue = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
@@ -21,6 +22,7 @@ class Login extends React.Component {
   async postUserData() {
     try {
       const result = await postUserLogin(this.state);
+      console.log(result)
       if (result.error) {
         return this.setState({
           password: "",
@@ -35,7 +37,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login-container">
-        <form clasName="login-form">
+        <form className="login-form">
           <h1>Enter User Details</h1>
           <input
             placeholder="email"
