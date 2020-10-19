@@ -1,5 +1,5 @@
 import React from "react";
-//import router and link
+import { Link } from "react-router-dom"
 
 const PreviewCard = ({
   history,
@@ -11,14 +11,9 @@ const PreviewCard = ({
 }) => {
   const averageRating = Math.round(average_rating * 10) / 10
   return (
-    <div /*Link*/
+    <Link to={`movie/${id}`}
       itemID={id}
       className="preview-card"
-      tabIndex="0"
-      role="button"
-      onClick={() => history.push(`movie/${id}`)}
-      // instead of div change to Link and remove onClick and onKeyPress
-      onKeyPress={() => history.push(`movie/${id}`)}
     >
       <img src={poster_path} alt={`poster of ${title}`}></img>
       <h3 className="movie-title">{title}</h3>
@@ -26,7 +21,7 @@ const PreviewCard = ({
       <p className="user-rating">
         {userRating ? `Your rating: ${userRating}` : "Click for more details"}{" "}
       </p>
-    </div>
+    </Link>
   );
 };
 
