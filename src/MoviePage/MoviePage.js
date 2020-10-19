@@ -25,9 +25,7 @@ class MoviePage extends Component {
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
-    console.log(response)
     const movie = await response.movie;
-    console.log(movie)
     this.setState({movie, userRating});
   }
   rateMovie = (e) => {

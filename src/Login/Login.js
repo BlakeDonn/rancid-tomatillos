@@ -10,6 +10,7 @@ class Login extends React.Component {
       badLogin: "",
     };
   }
+  
   updateValue = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };

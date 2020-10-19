@@ -44,7 +44,6 @@ export const getUserRatings = async (id) => {
       `https://rancid-tomatillos.herokuapp.com/api/v2/users/${id}/ratings`
     );
     return await promise.json();
-    //add error later
   } catch (e) {
     throw e;
   }
