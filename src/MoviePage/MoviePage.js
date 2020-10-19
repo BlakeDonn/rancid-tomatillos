@@ -41,7 +41,7 @@ class MoviePage extends Component {
     );
     if (response.error) {
       let userInput = window.confirm(
-        "You allready have a rating for this movie, would you like to delete it?"
+        "You already have a rating for this movie, would you like to delete it?"
       );
       if (userInput) {
         this.deleteMovie();
@@ -59,6 +59,7 @@ class MoviePage extends Component {
     this.setState({userRating: "Not yet rated"});
   };
   render() {
+    const averageRating = Math.round(this.state.movie.average_rating * 10) / 10
     return (
       <div itemID={this.state.movie.id}>
         <img
@@ -66,7 +67,7 @@ class MoviePage extends Component {
           alt={`backdrop of ${this.state.movie.title}`}
         ></img>
         <h3 className="movie-title">{this.state.movie.title}</h3>
-        <p>{this.state.movie.average_rating}</p>
+        <p>{averageRating}</p>
         <p>{this.state.movie.budget}</p>
         <p>{this.state.movie.genres}</p>
         <p>{this.state.movie.overview}</p>

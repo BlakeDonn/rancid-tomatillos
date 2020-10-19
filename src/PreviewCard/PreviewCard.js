@@ -8,6 +8,7 @@ const PreviewCard = ({
   average_rating,
   userRating,
 }) => {
+  const averageRating = Math.round(average_rating * 10) / 10
   return (
     <div
       itemID={id}
@@ -19,7 +20,7 @@ const PreviewCard = ({
     >
       <img src={poster_path} alt={`poster of ${title}`}></img>
       <h3 className="movie-title">{title}</h3>
-      <p className="avg-rating">{average_rating}</p>
+      <p className="avg-rating">{averageRating}</p>
       <p className="user-rating">
         {userRating ? `Your rating: ${userRating}` : "Click for more details"}{" "}
       </p>
