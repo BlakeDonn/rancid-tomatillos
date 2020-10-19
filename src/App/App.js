@@ -5,7 +5,8 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import Dashboard from "../Dashboard/Dashboard";
+import CardsContainer from "../CardsContainer/CardsContainer";
+
 import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
@@ -92,7 +93,7 @@ class App extends Component {
                 this.state.loggedIn ? (
                   <Redirect to="/" />
                 ) : (
-                    <Login {...props} toggleLogin={this.toggleLogin} />
+                    <Login toggleLogin={this.toggleLogin} />
                   )
               }
             />
@@ -103,8 +104,7 @@ class App extends Component {
                 this.state.error > 400 ? (
                   <Redirect to="/error" />
                 ) : (
-                    <Dashboard
-                      {...props}
+                    <CardsContainer
                       allMovies={this.state.movies}
                       userRatings={this.state.userRatings}
                       update={this.componentDidUpdate}
