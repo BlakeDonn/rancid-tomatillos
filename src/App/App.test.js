@@ -60,9 +60,8 @@ describe("App", () => {
     // if you can't isolate history to individual it block-- history from past test can leak into the next test 
     // memoryrouter encapsulates history of environment
     it("User is redirected to login page on link click", async () => {
-      let history = createMemoryHistory();
+
       render(
-        // might want to refactor and use link instead of history.push  in the component -- breaking any test that comes under this 
         <MemoryRouter>
           <App />
         </MemoryRouter>    
@@ -82,12 +81,33 @@ describe("App", () => {
     //quick fix: 
     //best practice take out router in app component + make sure render app in test -> wrapped in <Router history={history}
     it("Should route to a page with more movie details", async () => {
+      getIndividualMovie.mockResolvedValue(
+        { "movie": {
+          "id": 694919,
+          "title": "Money Plane",
+          "poster_path": "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+          "backdrop_path": "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
+          "release_date": "2020-09-29",
+          "overview": "A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
+          "genres": [
+            "Action"
+          ],
+          "budget": 0,
+          "revenue": 0,
+          "runtime": 82,
+          "tagline": "",
+          "average_rating": 4.75
+        } }
+      )
       render(
       <MemoryRouter>
         <App />
       </MemoryRouter>);
       const movieTitle = await waitFor(() => screen.getByAltText("poster of Money Plane"));
       expect(movieTitle).toBeInTheDocument()
+      userEvent.click(screen.getByRole('link', {name: /money plane/i}))
+      await waitFor(() => expect(screen.getByText("Runtime: 82 minutes")).toBeInTheDocument())
+
     })
  
   });

@@ -19,12 +19,14 @@ class MoviePage extends Component {
     if (this.state.userId) {
       userRating = this.props.userRatings.find(
         (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
-      );
-      if (userRating) {
-        userRating = userRating.rating;
+        );
+        if (userRating) {
+          userRating = userRating.rating;
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
+    console.log(response)
+    console.log(response.movie)
     const movie = await response.movie;
     this.setState({movie, userRating});
   }
