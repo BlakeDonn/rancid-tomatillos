@@ -6,7 +6,7 @@ class MoviePage extends Component {
     super(props);
     console.log(this.props);
     this.state = {
-      movie: {},
+      movie: null,
       error: "",
       movieId: props.params.id,
       userRating: "Not yet rated",
@@ -25,7 +25,9 @@ class MoviePage extends Component {
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
+    console.log(response)
     const movie = await response.movie;
+    console.log(movie)
     this.setState({movie, userRating});
   }
   rateMovie = (e) => {
@@ -59,45 +61,55 @@ class MoviePage extends Component {
     this.setState({userRating: "Not yet rated"});
   };
   render() {
-    const averageRating = Math.round(this.state.movie.average_rating * 10) / 10
-    return (
-      <div itemID={this.state.movie.id}>
-        <img
-          src={this.state.movie.backdrop_path}
-          alt={`backdrop of ${this.state.movie.title}`}
-        ></img>
-        <h3 className="movie-title">{this.state.movie.title}</h3>
-        <p>{averageRating}</p>
-        <p>{this.state.movie.budget}</p>
-        <p>{this.state.movie.genres}</p>
-        <p>{this.state.movie.overview}</p>
-        <p>{this.state.movie.release_date}</p>
-        <p>{this.state.movie.revenue}</p>
-        <p>{this.state.movie.runtime} minutes</p>
-        <p>{this.state.movie.tagline}</p>
-        {this.state.userId ? (
+    if (this.state.movie === null) {
+      return (<p>Loading</p>)
+    } else {
+      const averageRating = Math.round(this.state.movie.average_rating * 10) / 10
+      return (
+        <div itemID={this.state.movie.id}>
+          <img
+            src={this.state.movie.backdrop_path}
+            alt={`backdrop of ${this.state.movie.title}`}
+          ></img>
+          <h3 className="movie-title">{this.state.movie.title}</h3>
+          <p>{this.state.movie.tagline}</p>
+          <p>Average Rating: {averageRating}</p>
           <div>
-            <p className="user-rating">
-              {this.state.userRating
-                ? `Your Current Rating ${this.state.userRating}`
-                : "Seen this Movie? Leave a rating!"}
-            </p>
-            {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
-            <label>Rating this movie - 1(hate) - 10 (love)</label>
-            <input
-              onChange={this.rateMovie}
-              type="number"
-              min="1"
-              max="10"
-              required="required"
-            ></input>
-            <button onClick={this.submitRating}>Rate Movie</button>
+            <h4>Genres:</h4>
+            <ul>
+              {this.state.movie.genres.map(genre => (
+                <li>{genre}</li>
+              ))}
+            </ul>
           </div>
-        ) : (
-            <p>Login to rate movies</p>
-          )}
-      </div>
-    );
+          <p>Summary: {this.state.movie.overview}</p>
+          <p>Release Date: {this.state.movie.release_date}</p>
+          <p>Runtime: {this.state.movie.runtime} minutes</p>
+          {this.state.userId ? (
+            <div>
+              <p className="user-rating">
+                {this.state.userRating
+                  ? `Your Current Rating ${this.state.userRating}`
+                  : "Seen this Movie? Leave a rating!"}
+              </p>
+              {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
+              <label>Rating this movie - 1(hate) - 10 (love)</label>
+              <input
+                onChange={this.rateMovie}
+                type="number"
+                min="1"
+                max="10"
+                required="required"
+              ></input>
+              <button onClick={this.submitRating}>Rate Movie</button>
+            </div>
+          ) : (
+              <p>Login to rate movies</p>
+            )}
+        </div>
+      );
+    }
+    
   }
 }
 
