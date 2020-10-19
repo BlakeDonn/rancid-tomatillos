@@ -12,7 +12,6 @@ import MoviePage from "../MoviePage/MoviePage";
 import {
   getAllMovies,
   getUserRatings,
-  postUserRating,
   deleteUserRating,
 } from "../api";
 
