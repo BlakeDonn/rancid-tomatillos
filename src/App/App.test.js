@@ -9,7 +9,6 @@ import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
 
-// needs to get called each time you call "getAllMovies" within App 
 describe("App", () => {
   beforeEach(() => {
     getAllMovies.mockResolvedValue({
@@ -29,7 +28,6 @@ describe("App", () => {
   })
   
   describe("Header", () => {
-  //afterEach(cleanup) cleans DOM - not stubs created using data "retrieved" from jest.mock
     
     it("Should have a header with links", () => {
       render (
@@ -40,7 +38,7 @@ describe("App", () => {
       
       expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
       expect(screen.getByText('Home')).toBeInTheDocument();
-//refactor login regex
+
       const loginLink = screen.getByRole('link', {name: /login/i})
       expect(loginLink).toBeInTheDocument();
       expect(loginLink.href).toMatch(/login/i);
