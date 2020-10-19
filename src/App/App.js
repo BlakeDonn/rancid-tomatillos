@@ -69,7 +69,10 @@ class App extends Component {
     }
   };
   render() {
- 
+    const logged = this.state.loggedIn ? (
+      <Redirect to="/" />
+    ) : ( <Login toggleLogin={this.toggleLogin} />
+    )
     return (
       <>
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
@@ -87,16 +90,7 @@ class App extends Component {
               )}
               h
             />
-            <Route
-              path="/login"
-              render={(props) =>
-                this.state.loggedIn ? (
-                  <Redirect to="/" />
-                ) : (
-                    <Login toggleLogin={this.toggleLogin} />
-                  )
-              }
-            />
+            <Route exact path="/login">{logged}</Route>
             <Route exact path="/">
               <CardsContainer
                 allMovies={this.state.movies}
