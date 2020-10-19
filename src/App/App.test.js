@@ -49,7 +49,10 @@ describe("App", () => {
   describe("Dashboard", () => {
     
     it("Should load movies on mount", async () => {
-      render(<App />);
+      render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>);
       const movieTitle = await waitFor(() => screen.getByText("Money Plane"));
       expect(movieTitle).toBeInTheDocument()
     });
@@ -60,9 +63,9 @@ describe("App", () => {
       let history = createMemoryHistory();
       render(
         // might want to refactor and use link instead of history.push  in the component -- breaking any test that comes under this 
-        <Router history={history}>
+        <MemoryRouter>
           <App />
-        </Router>    
+        </MemoryRouter>    
       );
 
       userEvent.click(screen.getByRole("link", {name: "Login"}));
@@ -79,7 +82,10 @@ describe("App", () => {
     //quick fix: 
     //best practice take out router in app component + make sure render app in test -> wrapped in <Router history={history}
     it("Should route to a page with more movie details", async () => {
-      render(<App />);
+      render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>);
       const movieTitle = await waitFor(() => screen.getByAltText("poster of Money Plane"));
       expect(movieTitle).toBeInTheDocument()
     })
