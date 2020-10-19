@@ -4,7 +4,7 @@ import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Router, MemoryRouter } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { getAllMovies, getIndividualMovie } from "../api";
+import { getAllMovies, getIndividualMovie, postUserLogin, getUserRatings } from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
@@ -87,11 +87,6 @@ describe("App", () => {
       );
 
       userEvent.click(screen.getByRole("link", {name: "Login"}));
-      userEvent.type(screen.getByPlaceholderText("email"), "marge@turing.io");
-      userEvent.type(screen.getByPlaceholderText("password"), "test");
-      userEvent.click(screen.getByRole("button", {name: "Submit"}));
-
-      userEvent.click(screen.getByRole("link", {name: "Login"}));
       expect(screen.getByText(/login/i)).toBeInTheDocument();
       expect(screen.getByRole("button", {name: "Submit"})).toBeInTheDocument();
     });
@@ -104,14 +99,67 @@ describe("App", () => {
       render(
       <MemoryRouter>
         <App />
-      </MemoryRouter>);
+      </MemoryRouter>
+      );
       const movieTitle = await waitFor(() => screen.getByAltText("poster of Money Plane"));
       expect(movieTitle).toBeInTheDocument()
       userEvent.click(screen.getByRole('link', {name: /money plane/i}))
       await waitFor(() => expect(screen.getByText("Runtime: 82 minutes")).toBeInTheDocument())
     })
+    it("Should display custom dashboard and have option to rate a movie if a user is logged in", async () => {
+      postUserLogin.mockResolvedValue(
+        {
+          "user": {
+            "email": "marge@turing.io",
+            "id": 84,
+            "name": "Marge"
+          }
+        }
+      )
 
-    
+      getUserRatings.mockResolvedValue(
+        { "ratings": 
+          [
+            {
+              "id": 2743,
+              "user_id": 84,
+              "movie_id": 585244,
+              "rating": 3,
+              "created_at": "2020-10-15T00:41:26.504Z",
+              "updated_at": "2020-10-15T00:41:26.504Z"
+            },
+            {
+              "id": 2747,
+              "user_id": 84,
+              "movie_id": 413518,
+              "rating": 4,
+              "created_at": "2020-10-15T01:28:13.417Z",
+              "updated_at": "2020-10-15T01:28:13.417Z"
+            },
+            {
+              "id": 2749,
+              "user_id": 84,
+              "movie_id": 550231,
+              "rating": 4,
+              "created_at": "2020-10-15T01:37:34.555Z",
+              "updated_at": "2020-10-15T01:37:34.555Z"
+            }
+          ]
+        }
+      )
+
+      render (
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+       )
+       userEvent.click(screen.getByRole("link", {name: "Login"}));
+       userEvent.type(screen.getByPlaceholderText("email"), "marge@turing.io");
+       userEvent.type(screen.getByPlaceholderText("password"), "password123");
+       userEvent.click(screen.getByRole("button", {name: "Submit"}));
+       await waitFor(() => screen.debug())
+    })
+
   });
 })
 

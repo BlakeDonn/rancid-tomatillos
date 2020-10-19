@@ -4,7 +4,6 @@ import {getIndividualMovie, postUserRating} from "../api";
 class MoviePage extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       movie: null,
       error: "",
@@ -25,8 +24,6 @@ class MoviePage extends Component {
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
-    console.log(response)
-    console.log(response.movie)
     const movie = await response.movie;
     this.setState({movie, userRating});
   }
