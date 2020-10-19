@@ -123,7 +123,7 @@ describe("App", () => {
             {
               "id": 2743,
               "user_id": 84,
-              "movie_id": 585244,
+              "movie_id": 694919,
               "rating": 3,
               "created_at": "2020-10-15T00:41:26.504Z",
               "updated_at": "2020-10-15T00:41:26.504Z"
@@ -158,6 +158,9 @@ describe("App", () => {
        userEvent.type(screen.getByPlaceholderText("password"), "password123");
        userEvent.click(screen.getByRole("button", {name: "Submit"}));
        await waitFor(() => screen.debug())
+
+       expect(screen.getByText("Logout")).toBeInTheDocument()
+       expect(screen.getByText("Your rating: 3")).toBeInTheDocument()
     })
 
   });
