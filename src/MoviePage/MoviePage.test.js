@@ -10,6 +10,7 @@ jest.mock("../api.js");
 
 describe("MoviePage", () => {
   let match = {params: {id: 337401}, isExact: true, path: "", url: ""};
+  let favoriteMovies = "yeet";
   getIndividualMovie.mockResolvedValueOnce(
     {
       movie:
@@ -34,7 +35,7 @@ describe("MoviePage", () => {
   it("should mount with fetch data", async () => {
     render(
       <MemoryRouter>
-        <MoviePage {...match} />
+        <MoviePage {...match} favoriteMovies={[337401]} />
       </MemoryRouter>
     );
     const idea = await waitFor(() => screen.getByText("Runtime: 115 minutes"));
