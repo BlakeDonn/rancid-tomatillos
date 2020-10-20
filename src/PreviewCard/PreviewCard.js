@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 
 const PreviewCard = (props) => {
@@ -17,7 +17,7 @@ const PreviewCard = (props) => {
       <p className="avg-rating">{props.average_rating}</p>
       <p className="more-details"> "Click for more details"</p>
       <p className="user-rating">
-        {props.logged && `your rating: ${props.userRating}`}
+        {props.logged && props.userRating && `your rating: ${props.userRating}`}
       </p>
     </Link>
   );
