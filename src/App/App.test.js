@@ -54,7 +54,7 @@ describe("App", () => {
       </MemoryRouter>
       )
       
-      expect(screen.getByText('Rotten Tomatillos')).toBeInTheDocument();
+      expect(screen.getByText('Rancid Tomatillos')).toBeInTheDocument();
       expect(screen.getByText('Home')).toBeInTheDocument();
 
       const loginLink = screen.getByRole('link', {name: /login/i})

@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 const Header = (props) => {
   return (
     <nav>
-      <h1>Rotten Tomatillos</h1>
+      <h1>Rancid Tomatillos</h1>
       <ul>
         <li>
           <Link to="/">Home</Link>
