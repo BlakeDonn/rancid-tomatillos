@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getIndividualMovie, getMovieComments, postUserRating,postMovieComments} from "../api";
+import {getIndividualMovie, getMovieComments, postUserRating} from "../api";
 import CommentForm from "../CommentForm/CommentForm";
 
 class MoviePage extends Component {

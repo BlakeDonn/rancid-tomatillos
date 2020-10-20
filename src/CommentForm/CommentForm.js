@@ -1,12 +1,21 @@
 import React, {Component} from "react";
-
+import postUserComment from "../api";
 class CommentForm extends Component {
   constructor() {
     super()
     this.state = {
-
+      comment: ""
     }
   }
+  updateValue = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
+  // async submitComment = (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const result = await postUserComment()
+  //   }
+  // }
   render() {
     return (
       <>
@@ -15,11 +24,11 @@ class CommentForm extends Component {
         <h4>Your thoughts on movie:</h4>
         <input 
           placeholder="Your thoughts"
-          name="comment-input"
+          name="comment"
           onChange={this.updateValue}
           value={this.state.comment}
         ></input>
-        <button onClick={this.submitComment}>Submit</button>
+        {/* <button onClick={this.submitComment}>Submit</button> */}
       </form>
       </>
     )
