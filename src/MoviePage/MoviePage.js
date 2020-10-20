@@ -28,14 +28,13 @@ class MoviePage extends Component {
     const movie = moviePageData.details.movie;
     const comments = moviePageData.comments.comments
     this.setState({movie, userRating, comments});
+    console.log(this)
   }
   getMoviePageData = async () => {
     const data = {}
     data.comments = await getMovieComments(this.state.movieId)
     data.details = await getIndividualMovie(this.state.movieId)
     return await data
-    //should be array of comments
-
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
@@ -92,6 +91,16 @@ class MoviePage extends Component {
           <p>Release Date: {this.state.movie.release_date}</p>
           <p>Runtime: {this.state.movie.runtime} minutes</p>
           <p>Average Rating: {averageRating}</p>
+          <section className="movie-comments">
+            <h4>Comments:</h4>
+            {this.state.comments.length > 0 && this.state.comments.map(comment => (
+              <section className={comment.id}>
+                <h5>{comment.author} says:</h5>
+                <p>"{comment.comment}"</p>
+              </section>))
+            }
+          </section>
+          
           {this.state.userId ? (
             <div>
               <p className="user-rating">
@@ -111,8 +120,9 @@ class MoviePage extends Component {
               <button onClick={this.submitRating}>Rate Movie</button>
             </div>
           ) : (
-              <p>Log into your account to rate movies</p>
+              <p>Log into your account to rate and comment on  movies</p>
             )}
+
         </div>
       );
     }
