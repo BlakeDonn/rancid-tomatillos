@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {getIndividualMovie, postUserRating} from "../api";
+import {getIndividualMovie, getMovieComments, postUserRating,postMovieComments} from "../api";
 
 class MoviePage extends Component {
   constructor(props) {
@@ -7,17 +7,18 @@ class MoviePage extends Component {
     this.state = {
       movie: null,
       error: "",
-      movieId: props.params.id,
+      movieId: parseInt(props.params.id),
       userRating: "Not yet rated",
       displayedRating: 0,
       userId: typeof props.userId === "number" ? props.userId : null,
+      comments: []
     };
   }
   async componentDidMount() {
     let userRating;
     if (this.state.userId) {
       userRating = this.props.userRatings.find(
-        (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
+        (rating) => parseInt(rating.movie_id) === this.state.movieId
         );
         if (userRating) {
           userRating = userRating.rating;
@@ -25,7 +26,11 @@ class MoviePage extends Component {
     }
     const response = await getIndividualMovie(this.state.movieId);
     const movie = await response.movie;
+    console.log(movie)
     this.setState({movie, userRating});
+  }
+  getMoviePageData = async () => {
+    const comments = await getMovieComments(this.state.movieId)
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
