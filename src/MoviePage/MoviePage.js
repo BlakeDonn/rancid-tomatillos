@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {getIndividualMovie, getMovieComments, postUserRating,postMovieComments} from "../api";
+import CommentForm from "../CommentForm/CommentForm";
 
 class MoviePage extends Component {
   constructor(props) {
@@ -102,13 +103,14 @@ class MoviePage extends Component {
           </section>
           
           {this.state.userId ? (
-            <div>
+            
+            <section className="user-interaction-section">
+              <CommentForm />
               <p className="user-rating">
                 {this.state.userRating
                   ? `Your Current Rating ${this.state.userRating}`
                   : "Seen this Movie? Leave a rating!"}
               </p>
-              {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
               <label>Rating this movie - 1(hate) - 10 (love)</label>
               <input
                 onChange={this.rateMovie}
@@ -118,9 +120,9 @@ class MoviePage extends Component {
                 required="required"
               ></input>
               <button onClick={this.submitRating}>Rate Movie</button>
-            </div>
+            </section>
           ) : (
-              <p>Log into your account to rate and comment on  movies</p>
+              <p>Log into your account to rate and comment on movies</p>
             )}
 
         </div>
