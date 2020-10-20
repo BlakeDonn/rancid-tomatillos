@@ -1,4 +1,5 @@
 import React from "react";
+import "./PreviewCard.css"
 import {Link} from "react-router-dom";
 import {ReactComponent as Tomato} from "../Assets/tomato.svg";
 import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
