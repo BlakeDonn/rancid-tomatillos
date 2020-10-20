@@ -13,7 +13,8 @@ function CardsContainer(props) {
     return <PreviewCard history={props.history} {...movie} />;
   });
 
-  return <div className="container">{previewCards}</div>;
+  return <div className="container">
+    {previewCards}</div>;
 }
 
 export default CardsContainer;

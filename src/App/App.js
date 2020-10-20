@@ -61,10 +61,8 @@ class App extends Component {
   };
   deleteRating = async (movieId) => {
     let ratedMovie = this.matchRating(movieId);
-    console.log(ratedMovie)
     if (!ratedMovie) {
       let ratings = await getUserRatings(this.state.userId);
-      console.log(ratings)
       this.setState({userRatings: ratings.ratings});
       ratedMovie = this.state.userRatings.find(
         (rating) => parseInt(rating.movie_id) == parseInt(movieId)
@@ -89,6 +87,7 @@ class App extends Component {
                 <MoviePage
                   {...match}
                   userId={this.state.userId}
+                  userName={this.state.userName}
                   deleteRating={this.deleteRating}
                   userRatings={this.state.userRatings}
                 />

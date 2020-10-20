@@ -9,6 +9,7 @@ class MoviePage extends Component {
       movie: null,
       error: "",
       movieId: parseInt(props.params.id),
+      userName: "",
       userRating: "Not yet rated",
       displayedRating: 0,
       userId: typeof props.userId === "number" ? props.userId : null,
@@ -28,7 +29,8 @@ class MoviePage extends Component {
     const moviePageData = await this.getMoviePageData()
     const movie = moviePageData.details.movie;
     const comments = moviePageData.comments.comments
-    this.setState({movie, userRating, comments});
+    const userName = this.props.userName
+    this.setState({movie, userRating, comments, userName});
     console.log(this)
   }
   getMoviePageData = async () => {
@@ -105,7 +107,7 @@ class MoviePage extends Component {
           {this.state.userId ? (
             
             <section className="user-interaction-section">
-              <CommentForm />
+              <CommentForm userName={this.state.userName} />
               <p className="user-rating">
                 {this.state.userRating
                   ? `Your Current Rating ${this.state.userRating}`

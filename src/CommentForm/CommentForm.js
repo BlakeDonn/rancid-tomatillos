@@ -1,14 +1,16 @@
 import React, {Component} from "react";
 import postUserComment from "../api";
 class CommentForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      comment: ""
+      comment: "",
+      userName: ""
     }
   }
   updateValue = (e) => {
-    this.setState({[e.target.name]: e.target.value})
+    this.setState({[e.target.name]: e.target.value, userName: this.props.userName})
+    console.log(this)
   }
   // async submitComment = (e) => {
   //   e.preventDefault()
@@ -19,7 +21,7 @@ class CommentForm extends Component {
   render() {
     return (
       <>
-      I AM A COMMENT FORM
+      I AM A COMMENT FORM {this.state.userName}
       <form className="comment-form">
         <h4>Your thoughts on movie:</h4>
         <input 
