@@ -1,15 +1,9 @@
-import React, {Component} from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import CardsContainer from "../CardsContainer/CardsContainer";
-import Header from "../Header/Header";
-import Login from "../Login/Login";
-import MoviePage from "../MoviePage/MoviePage";
-import ErrorPage from "../ErrorPage/ErrorPage";
 import {
   getAllMovies,
   getUserRatings,
@@ -17,6 +11,13 @@ import {
   getFavoriteMovies,
   postFavorite,
 } from "../api";
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import CardsContainer from "../CardsContainer/CardsContainer";
+import Header from "../Header/Header";
+import Login from "../Login/Login";
+import MoviePage from "../MoviePage/MoviePage";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 import "./App.css";
 
@@ -26,11 +27,10 @@ class App extends Component {
     this.state = {
       favoriteView: false,
       loggedIn: false,
+      favoriteMovies: [],
+      movies: [],
       userId: 0,
       userRatings: [],
-      movies: [],
-      favoriteMovies: [],
-      error: "",
     };
   }
   async componentDidMount() {
@@ -131,4 +131,12 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  favoriteView: PropTypes.bool,
+  loggedIn: PropTypes.bool,
+  favoriteMovies: PropTypes.array,
+  movies: PropTypes.array,
+  userId: PropTypes.number,
+  userRatings: PropTypes.array,
+};
 export default App;
