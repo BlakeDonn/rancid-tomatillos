@@ -10,7 +10,7 @@ function CardsContainer(props) {
     if (ratedMovie) {
       movie.userRating = ratedMovie.rating;
     }
-    return <PreviewCard {...movie} favoriteMovies={props.favoriteMovies} logged={props.loggedIn} />;
+    return <PreviewCard {...movie} toggleFavorite={props.toggleFavorite} favoriteMovies={props.favoriteMovies} logged={props.loggedIn} />;
   });
 
   return <div className="container">{previewCards}</div>;

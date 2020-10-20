@@ -52,7 +52,7 @@ class App extends Component {
       favoriteMovies: favoriteMovies,
     });
   };
-  favoriteMovie = async (id) => {
+  toggleFavorite = async (id) => {
     const favResponse = await postFavorite(id);
     console.log(favResponse)
   };
@@ -105,7 +105,7 @@ class App extends Component {
                 allMovies={this.state.movies}
                 userRatings={this.state.userRatings}
                 favoriteMovies={this.state.favoriteMovies}
-                favoriteMovie={this.favoriteMovie}
+                toggleFavorite={this.toggleFavorite}
                 loggedIn={this.state.loggedIn}
               />
             </Route>

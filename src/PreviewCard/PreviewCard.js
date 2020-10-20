@@ -1,20 +1,25 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import {ReactComponent as Tomato} from "../Assets/tomato.svg";
 
 const PreviewCard = (props) => {
-  const average = Math.round(props.average_rating * 10) / 10
-  const favorite = props.favoriteMovies.includes(props.id) ? "One of your favorites" : null
+  const average = Math.round(props.average_rating * 10) / 10;
+  const favorite = props.favoriteMovies.includes(props.id)
+    ? <Tomato />
+    : null;
   return (
-    <Link to={`movie/${props.id}`} itemID={props.id} className="preview-card">
+    <div itemID={props.id} className="preview-card">
       <img src={props.poster_path} alt={`poster of ${props.title}`}></img>
       <h3 className="movie-title">{props.title}</h3>
-      <p className="avg-rating">{average}</p>
-      <p className="more-details"> "Click for more details"</p>
+      {favorite}
+      <p className="avg-rating">Average Rating: {average}</p>
       <p className="user-rating">
         {props.logged && props.userRating && `your rating: ${props.userRating}`}
       </p>
-      <p className="favorite-status" >{favorite}</p>
-    </Link>
+      <Link to={`movie/${props.id}`} className="more-details">
+        Click for more details
+      </Link>
+    </div>
   );
 };
 export default PreviewCard;
