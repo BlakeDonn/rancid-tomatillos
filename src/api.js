@@ -80,6 +80,17 @@ export const deleteUserRating = async (userId, ratingId) => {
   }
 };
 
+export const getMovieComments = async (movieId) => {
+  try {
+    let promise = await fetch(
+      `https://rancid-tomatillos-backend.herokuapp.com/api/v1/movies/${movieId}/comments`
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e
+  }
+};
+
 export const postMovieComments = async (movieId) => {
   try {
     fetch(`https://rancid-tomatillos-backend.herokuapp.com/api/v1/movies/${movieId}/comments`, {
@@ -95,3 +106,4 @@ export const postMovieComments = async (movieId) => {
     throw e;
   }
 };
+
