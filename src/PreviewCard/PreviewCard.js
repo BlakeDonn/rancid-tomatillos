@@ -2,7 +2,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 const PreviewCard = (props) => {
-  console.log(props)
   return (
     <Link
       to={`movie/${props.id}`}
