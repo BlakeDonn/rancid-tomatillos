@@ -6,6 +6,7 @@ class Login extends React.Component {
     super();
     this.state = {
       email: "",
+      name: "",
       password: "",
       badLogin: "",
     };
@@ -30,7 +31,12 @@ class Login extends React.Component {
           badLogin: result.error,
         });
       } else {
+        const email = result.user.email;
+        const name = result.user.name;
+        const password = ""
         this.props.toggleLogin(result.user.id);
+        this.setState({email, name, password});
+        console.log(this)
       }
     } catch (e) {}
   }
