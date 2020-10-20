@@ -53,8 +53,9 @@ class App extends Component {
     });
   };
   toggleFavorite = async (id) => {
-    const favResponse = await postFavorite(id);
-    console.log(favResponse)
+    await postFavorite(id);
+    const newFavorites = await getFavoriteMovies();
+    this.setState({favoriteMovies: newFavorites});
   };
   matchRating = (movieId, userRatings) => {
     let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
@@ -94,6 +95,8 @@ class App extends Component {
                   userId={this.state.userId}
                   deleteRating={this.deleteRating}
                   userRatings={this.state.userRatings}
+                  toggleFavorite={this.toggleFavorite}
+                  favoriteMovies={this.state.favoriteMovies}
                 />
               )}
             />
