@@ -5,7 +5,7 @@ export const getIndividualMovie = async (id, props) => {
     );
     return await promise.json();
   } catch (e) {
-    throw e
+    throw e;
   }
 };
 
@@ -23,7 +23,7 @@ export const getAllMovies = async () => {
 export const getFavoriteMovies = async () => {
   try {
     const promise = await fetch(
-      "http://localhost:3001/api/v1/favorites"
+      "https://rancid-tomatillos-backend.herokuapp.com/api/v1/favorites"
     );
     return await promise.json();
   } catch (e) {
@@ -31,6 +31,23 @@ export const getFavoriteMovies = async () => {
   }
 };
 
+export const postFavorite = async (id) => {
+  try {
+    const promise = await fetch(
+      "https://rancid-tomatillos-backend.herokuapp.com/api/v1/favorites",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id: id}),
+      }
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e;
+  }
+};
 export const postUserLogin = async (loginInfo) => {
   try {
     const promise = await fetch(
@@ -69,7 +86,7 @@ export const postUserRating = async (id, userRating, movieId) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({movie_id: movieId, rating: userRating}),
+        body: JSON.stringify({id: id}),
       }
     );
     return await promise.json();

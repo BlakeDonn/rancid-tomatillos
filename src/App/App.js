@@ -15,6 +15,7 @@ import {
   getUserRatings,
   deleteUserRating,
   getFavoriteMovies,
+  postFavorite,
 } from "../api";
 
 import "./App.css";
@@ -48,8 +49,12 @@ class App extends Component {
       loggedIn: !this.state.loggedIn,
       userId: id,
       userRatings: ratings.ratings,
-      favoriteMovies: favoriteMovies
+      favoriteMovies: favoriteMovies,
     });
+  };
+  favoriteMovie = async (id) => {
+    const favResponse = await postFavorite(id);
+    console.log(favResponse)
   };
   matchRating = (movieId, userRatings) => {
     let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
@@ -100,6 +105,7 @@ class App extends Component {
                 allMovies={this.state.movies}
                 userRatings={this.state.userRatings}
                 favoriteMovies={this.state.favoriteMovies}
+                favoriteMovie={this.favoriteMovie}
                 loggedIn={this.state.loggedIn}
               />
             </Route>
