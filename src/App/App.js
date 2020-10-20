@@ -10,11 +10,7 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import {
-  getAllMovies,
-  getUserRatings,
-  deleteUserRating,
-} from "../api";
+import {getAllMovies, getUserRatings, deleteUserRating} from "../api";
 
 import "./App.css";
 
@@ -57,22 +53,23 @@ class App extends Component {
   };
   deleteRating = async (movieId) => {
     let ratedMovie = this.matchRating(movieId);
-    console.log(ratedMovie)
+    console.log(ratedMovie);
     if (!ratedMovie) {
       let ratings = await getUserRatings(this.state.userId);
-      console.log(ratings)
+      console.log(ratings);
       this.setState({userRatings: ratings.ratings});
       ratedMovie = this.state.userRatings.find(
         (rating) => parseInt(rating.movie_id) == parseInt(movieId)
       );
-      deleteUserRating(this.state.userId, ratedMovie.id)
+      deleteUserRating(this.state.userId, ratedMovie.id);
     }
   };
   render() {
     const logged = this.state.loggedIn ? (
       <Redirect to="/" />
-    ) : ( <Login toggleLogin={this.toggleLogin} />
-    )
+    ) : (
+        <Login toggleLogin={this.toggleLogin} />
+      );
     return (
       <>
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
@@ -88,14 +85,15 @@ class App extends Component {
                   userRatings={this.state.userRatings}
                 />
               )}
-              h
             />
-            <Route exact path="/login">{logged}</Route>
+            <Route exact path="/login">
+              {logged}
+            </Route>
             <Route exact path="/">
               <CardsContainer
                 allMovies={this.state.movies}
                 userRatings={this.state.userRatings}
-                update={this.componentDidUpdate} />
+              />
             </Route>
             <Route exact path="/error" component={ErrorPage} />
             <Redirect to="/error" />
