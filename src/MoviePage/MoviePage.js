@@ -24,15 +24,16 @@ class MoviePage extends Component {
           userRating = userRating.rating;
       }
     }
-    const response = await getIndividualMovie(this.state.movieId);
-    const movie = await response.movie;
-    const comments = await this.getMoviePageData()
-    console.log(comments)
+    const moviePageData = await this.getMoviePageData()
+    const movie = moviePageData.details.movie;
+    const comments = moviePageData.comments.comments
     this.setState({movie, userRating, comments});
   }
   getMoviePageData = async () => {
-    const fetchedComments = await getMovieComments(this.state.movieId)
-    return await fetchedComments.comments
+    const data = {}
+    data.comments = await getMovieComments(this.state.movieId)
+    data.details = await getIndividualMovie(this.state.movieId)
+    return await data
     //should be array of comments
 
   }
