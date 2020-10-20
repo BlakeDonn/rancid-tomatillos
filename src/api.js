@@ -20,6 +20,17 @@ export const getAllMovies = async () => {
   }
 };
 
+export const getFavoriteMovies = async () => {
+  try {
+    const promise = await fetch(
+      "http://localhost:3001/api/v1/favorites"
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const postUserLogin = async (loginInfo) => {
   try {
     const promise = await fetch(
