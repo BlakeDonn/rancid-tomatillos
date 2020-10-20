@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 const Header = (props) => {
   return (
     <nav>
@@ -8,15 +8,18 @@ const Header = (props) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          {!props.loggedIn ? (
+        {!props.loggedIn && (
+          <li>
             <Link to="/login">Login</Link>
-          ) : (
-              <Link to="/" onClick={props.toggleLogin}>
-                Logout
-              </Link>
-            )}
-        </li>
+          </li>
+        )}
+        {props.loggedIn && (
+          <li>
+            <Link to="/" onClick={props.toggleLogin}>
+              Logout
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

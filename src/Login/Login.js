@@ -10,7 +10,7 @@ class Login extends React.Component {
       badLogin: "",
     };
   }
-  
+
   updateValue = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
@@ -22,7 +22,7 @@ class Login extends React.Component {
   async postUserData() {
     try {
       const result = await postUserLogin(this.state);
-      console.log(result)
+      console.log(result);
       if (result.error) {
         return this.setState({
           password: "",
