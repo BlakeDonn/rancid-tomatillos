@@ -39,6 +39,7 @@ class MoviePage extends Component {
       this.state.displayedRating,
       this.state.movie.id
     );
+    console.log(response)
     if (response.error) {
       let userInput = window.confirm(
         "You already have a rating for this movie, would you like to delete it?"

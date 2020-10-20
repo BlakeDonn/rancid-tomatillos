@@ -86,7 +86,7 @@ export const postUserRating = async (id, userRating, movieId) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({id: id}),
+        body: JSON.stringify({movie_id: movieId, rating: userRating}),
       }
     );
     return await promise.json();
