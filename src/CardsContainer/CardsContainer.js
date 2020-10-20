@@ -4,7 +4,7 @@ import PreviewCard from "../PreviewCard/PreviewCard";
 function CardsContainer(props) {
   let ratedMovie;
   let moviesToDisplay;
-  if (props.favoriteView) {
+  if (props.favoriteView && props.loggedIn) {
     moviesToDisplay = props.allMovies.filter((movie) =>
       props.favoriteMovies.includes(movie.id)
     );
