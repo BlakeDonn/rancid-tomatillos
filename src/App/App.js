@@ -10,7 +10,12 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import {getAllMovies, getUserRatings, deleteUserRating} from "../api";
+import {
+  getAllMovies,
+  getUserRatings,
+  deleteUserRating,
+  getFavoriteMovies,
+} from "../api";
 
 import "./App.css";
 
@@ -22,12 +27,14 @@ class App extends Component {
       userId: 0,
       userRatings: [],
       movies: [],
+      favoriteMovies: [],
       error: "",
     };
   }
   async componentDidMount() {
     const allMovies = await getAllMovies();
     let movies = allMovies.movies;
+
     if (movies.length) {
       this.setState({movies});
     } else {
@@ -35,14 +42,15 @@ class App extends Component {
     }
   }
   toggleLogin = async (id) => {
-    let ratings = await getUserRatings(id);
+    const ratings = await getUserRatings(id);
+    const favoriteMovies = await getFavoriteMovies();
     this.setState({
       loggedIn: !this.state.loggedIn,
       userId: id,
       userRatings: ratings.ratings,
+      favoriteMovies: favoriteMovies
     });
   };
-
   matchRating = (movieId, userRatings) => {
     let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
     if (this.loggedIn) {
@@ -57,7 +65,7 @@ class App extends Component {
       let ratings = await getUserRatings(this.state.userId);
       this.setState({userRatings: ratings.ratings});
       ratedMovie = this.state.userRatings.find(
-        (rating) => parseInt(rating.movie_id) == parseInt(movieId)
+        (rating) => parseInt(rating.movie_id) === parseInt(movieId)
       );
       deleteUserRating(this.state.userId, ratedMovie.id);
     }
@@ -91,6 +99,7 @@ class App extends Component {
               <CardsContainer
                 allMovies={this.state.movies}
                 userRatings={this.state.userRatings}
+                favoriteMovies={this.state.favoriteMovies}
                 loggedIn={this.state.loggedIn}
               />
             </Route>
