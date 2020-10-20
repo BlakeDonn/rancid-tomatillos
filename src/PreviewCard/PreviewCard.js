@@ -1,5 +1,5 @@
 import React from "react";
-import "./PreviewCard.css"
+import "./PreviewCard.css";
 import {Link} from "react-router-dom";
 import {ReactComponent as Tomato} from "../Assets/tomato.svg";
 import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
@@ -20,8 +20,8 @@ const PreviewCard = (props) => {
   return (
     <div itemID={props.id} className="preview-card">
       <img src={props.poster_path} alt={`poster of ${props.title}`}></img>
-      <h3 className="movie-title">{props.title}</h3>
       {props.logged && favorite}
+      <h3 className="movie-title">{props.title}</h3>
       <p className="avg-rating">Average Rating: {average}</p>
       <p className="user-rating">
         {props.logged && props.userRating && `your rating: ${props.userRating}`}
