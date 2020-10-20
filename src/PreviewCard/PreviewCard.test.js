@@ -1,7 +1,6 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import {Router, MemoryRouter} from "react-router-dom";
-import {history} from "history";
+import {MemoryRouter} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import userEvent from "@testing-library/user-event";
 import PreviewCard from "./PreviewCard";
@@ -9,12 +8,9 @@ import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 
 describe("Card", () => {
-  const fakeClick = jest.fn();
-  const historyMock = {push: fakeClick};
   beforeEach(() => {
-    const history = createMemoryHistory();
     render(
-      <Router history={history}>
+      <MemoryRouter>
         <PreviewCard
           average_rating={9}
           backdrop_path="testback"
@@ -22,22 +18,15 @@ describe("Card", () => {
           poster_path="testpath"
           release_date="test-date"
           title="Test Title"
-          history={history}
+          favoriteMovies={[1234]}
         />
-      </Router>
+      </MemoryRouter>
     );
   });
   it("should render a card", () => {
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
-    expect(screen.getByText("9")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toBeInTheDocument();
+    expect(screen.getByText("Average Rating: 9")).toBeInTheDocument();
   });
-
-  // it("should call history push on click", () => {
-  //   expect(screen.getByRole("button", {id: "9"}));
-  //   userEvent.click(screen.getByRole("button", {id: "9"}));
-  //   expect(fakeClick).toHaveBeenCalledTimes(1)
-  // });
 
 });

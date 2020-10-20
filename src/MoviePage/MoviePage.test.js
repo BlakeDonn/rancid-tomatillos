@@ -10,7 +10,6 @@ jest.mock("../api.js");
 
 describe("MoviePage", () => {
   let match = {params: {id: 337401}, isExact: true, path: "", url: ""};
-  let favoriteMovies = "yeet";
   getIndividualMovie.mockResolvedValueOnce(
     {
       movie:
