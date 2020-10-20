@@ -26,5 +26,4 @@ describe("Card", () => {
     expect(screen.getByAltText("poster of Test Title")).toBeInTheDocument();
     expect(screen.getByText("Average Rating: 9")).toBeInTheDocument();
   });
-
 });
