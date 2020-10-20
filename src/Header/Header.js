@@ -26,7 +26,7 @@ const Header = (props) => {
         )}
         {props.loggedIn && (
           <li>
-            <Link to="/" onClick={props.toggleLogin}>
+            <Link to="/" onClick={() => props.toggleLogin()}>
               Logout
             </Link>
           </li>

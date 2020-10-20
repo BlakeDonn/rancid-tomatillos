@@ -56,7 +56,6 @@ class App extends Component {
   toggleFavorite = async (id) => {
     await postFavorite(id);
     const newFavorites = await getFavoriteMovies();
-    console.log(newFavorites);
     this.setState({favoriteMovies: newFavorites});
   };
   toggleFavoriteView = () => {
