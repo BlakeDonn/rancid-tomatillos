@@ -3,7 +3,7 @@ import PreviewCard from "../PreviewCard/PreviewCard";
 
 function CardsContainer(props) {
   let ratedMovie;
-  let pCards = props.movies.map((movie) => {
+  let previewCards = props.allMovies.map((movie) => {
     if (props.userRatings) {
       ratedMovie = props.userRatings.find((x) => x.movie_id === movie.id);
     }
@@ -13,7 +13,10 @@ function CardsContainer(props) {
     return <PreviewCard history={props.history} {...movie} />;
   });
 
-  return <div className="container">{pCards}</div>;
+  return <div className="container">{previewCards}</div>;
 }
 
 export default CardsContainer;
+
+
+//replace dashboard with cardscontainer (delete one--redundant)
