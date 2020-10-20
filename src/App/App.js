@@ -24,6 +24,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       userId: 0,
+      userEmail: "",
+      userName: "",
       userRatings: [],
       movies: [],
       error: "",
@@ -38,11 +40,13 @@ class App extends Component {
       this.setState({error: movies.status});
     }
   }
-  toggleLogin = async (id) => {
-    let ratings = await getUserRatings(id);
+  toggleLogin = async (data) => {
+    let ratings = await getUserRatings(data.id);
     this.setState({
       loggedIn: !this.state.loggedIn,
-      userId: id,
+      userId: data.id,
+      userEmail: data.email,
+      userName: data.name,
       userRatings: ratings.ratings,
     });
   };
@@ -76,6 +80,7 @@ class App extends Component {
     return (
       <>
         <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
+        <h2>Welcome {this.state.userName}</h2>
         <div className="page-container">
           <Switch>
             <Route

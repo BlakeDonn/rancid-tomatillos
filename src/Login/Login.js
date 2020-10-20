@@ -6,7 +6,6 @@ class Login extends React.Component {
     super();
     this.state = {
       email: "",
-      name: "",
       password: "",
       badLogin: "",
     };
@@ -23,7 +22,6 @@ class Login extends React.Component {
   async postUserData() {
     try {
       const result = await postUserLogin(this.state);
-      console.log(result)
       if (result.error) {
         return this.setState({
           password: "",
@@ -31,12 +29,7 @@ class Login extends React.Component {
           badLogin: result.error,
         });
       } else {
-        const email = result.user.email;
-        const name = result.user.name;
-        const password = ""
-        this.props.toggleLogin(result.user.id);
-        this.setState({email, name, password});
-        console.log(this)
+        this.props.toggleLogin(result.user);
       }
     } catch (e) {}
   }
