@@ -93,6 +93,7 @@ class App extends Component {
               <CardsContainer
                 allMovies={this.state.movies}
                 userRatings={this.state.userRatings}
+                loggedIn={this.state.loggedIn}
               />
             </Route>
             <Route exact path="/error" component={ErrorPage} />

@@ -9,9 +9,8 @@ function CardsContainer(props) {
     }
     if (ratedMovie) {
       movie.userRating = ratedMovie.rating;
-      movie.userId = props.userRatings[0].user_id
     }
-    return <PreviewCard  {...movie} />;
+    return <PreviewCard  {...movie} logged={props.loggedIn} />;
   });
 
   return <div className="container">{previewCards}</div>;
