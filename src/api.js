@@ -91,7 +91,7 @@ export const getMovieComments = async (movieId) => {
   }
 };
 
-export const postUserComment = async (movieId) => {
+export const postUserComment = async (movieId, userName, comment) => {
   try {
     fetch(`https://rancid-tomatillos-backend.herokuapp.com/api/v1/movies/${movieId}/comments`, {
       method: "POST",
@@ -99,7 +99,7 @@ export const postUserComment = async (movieId) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(
-        { comment: "ADD VARIABLE", author: "ADD USER'S NAME" }
+        { comment: comment, author: userName }
       )
     })
   } catch (e) {

@@ -1,36 +1,37 @@
 import React, {Component} from "react";
-import postUserComment from "../api";
+import {postUserComment} from "../api";
 class CommentForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      comment: "",
-      userName: ""
+      comment: ""
     }
   }
   updateValue = (e) => {
-    this.setState({[e.target.name]: e.target.value, userName: this.props.userName})
+    this.setState({[e.target.name]: e.target.value})
     console.log(this)
   }
-  // async submitComment = (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     const result = await postUserComment()
-  //   }
-  // }
+  submitComment = async (e) => {
+    e.preventDefault()
+    const result = await postUserComment(this.props.movieId, this.props.userName, this.state.comment)
+    try {
+      console.log(result)
+    } catch (error) {
+      throw error
+    }
+  }
   render() {
     return (
       <>
-      I AM A COMMENT FORM {this.state.userName}
       <form className="comment-form">
-        <h4>Your thoughts on movie:</h4>
+        <h4>{this.props.userName}'s thoughts on movie:</h4>
         <input 
           placeholder="Your thoughts"
           name="comment"
           onChange={this.updateValue}
           value={this.state.comment}
         ></input>
-        {/* <button onClick={this.submitComment}>Submit</button> */}
+        <button onClick={this.submitComment}>Submit</button>
       </form>
       </>
     )

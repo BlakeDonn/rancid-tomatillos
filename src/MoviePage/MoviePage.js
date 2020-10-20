@@ -107,7 +107,7 @@ class MoviePage extends Component {
           {this.state.userId ? (
             
             <section className="user-interaction-section">
-              <CommentForm userName={this.state.userName} />
+              <CommentForm userName={this.state.userName} movieId={this.state.movieId} />
               <p className="user-rating">
                 {this.state.userRating
                   ? `Your Current Rating ${this.state.userRating}`
