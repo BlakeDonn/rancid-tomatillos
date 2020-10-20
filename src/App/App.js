@@ -60,7 +60,7 @@ class App extends Component {
     this.setState({favoriteMovies: newFavorites});
   };
   toggleFavoriteView = () => {
-    this.setState({favoriteView: true});
+    this.setState({favoriteView: !this.state.favoriteView});
   };
   matchRating = (movieId, userRatings) => {
     let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
@@ -93,6 +93,7 @@ class App extends Component {
           toggleFavoriteView={this.toggleFavoriteView}
           toggleLogin={this.toggleLogin}
           loggedIn={this.state.loggedIn}
+          favoriteView={this.state.favoriteView}
         />
         <div className="page-container">
           <Switch>

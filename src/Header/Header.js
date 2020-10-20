@@ -8,10 +8,17 @@ const Header = (props) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        {props.loggedIn && (
+        {props.loggedIn && !props.favoriteView && (
           <li>
             <Link to="/" onClick={props.toggleFavoriteView}>
               Favorites
+            </Link>
+          </li>
+        )}
+        {props.loggedIn && props.favoriteView && (
+          <li>
+            <Link to="/" onClick={props.toggleFavoriteView}>
+              All Movies
             </Link>
           </li>
         )}
