@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-
 class PreviewCard extends Component {
   constructor(props) {
     super(props);
@@ -14,10 +13,9 @@ class PreviewCard extends Component {
   render() {
     return (
       <Link
+        to={`movie/${this.props.id}`}
         itemID={this.props.id}
         className="preview-card"
-        role="button"
-        onClick={() => this.props.history.push(`movie/${this.props.id}`)}
       >
         <img
           src={this.props.poster_path}
@@ -25,10 +23,9 @@ class PreviewCard extends Component {
         ></img>
         <h3 className="movie-title">{this.props.title}</h3>
         <p className="avg-rating">{this.props.average_rating}</p>
+        <p className="more-details"> "Click for more details"</p>
         <p className="user-rating">
-          {this.props.userRating
-            ? `Your rating: ${this.props.userRating}`
-            : "Click for more details"}{" "}
+          {this.props.userRating && `Your rating: ${this.props.userRating}`}
         </p>
       </Link>
     );
