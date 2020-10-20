@@ -34,14 +34,14 @@ class MoviePage extends Component {
     if (this.props.favoriteMovies.includes(parseInt(this.state.movieId))) {
       return (
         <Tomato
-          onClick={() => this.props.toggleFavorite(this.props.id)}
+          onClick={() => this.props.toggleFavorite(this.state.movieId)}
           className={"tomato"}
         />
       );
     } else {
       return (
         <UnTomato
-          onClick={() => this.props.toggleFavorite(this.props.id)}
+          onClick={() => this.props.toggleFavorite(this.state.movieId)}
           className={"tomato"}
         />
       );
@@ -58,7 +58,6 @@ class MoviePage extends Component {
       this.state.displayedRating,
       this.state.movie.id
     );
-    console.log(response);
     if (response.error) {
       let userInput = window.confirm(
         "You already have a rating for this movie, would you like to delete it?"
@@ -75,7 +74,7 @@ class MoviePage extends Component {
     if (this.state.movie === null) {
       return <p>Loading</p>;
     } else {
-      const tomatoType = this.determineFavorite(this.state.movieId)
+      const tomatoType = this.determineFavorite()
       const averageRating =
         Math.round(this.state.movie.average_rating * 10) / 10;
       return (
@@ -106,7 +105,6 @@ class MoviePage extends Component {
                   : "Seen this Movie? Leave a rating!"}
                 {this.state.userId && tomatoType}
               </p>
-              {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
               <label>Rating this movie - 1(hate) - 10 (love)</label>
               <input
                 onChange={this.rateMovie}
