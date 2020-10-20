@@ -20,6 +20,7 @@ function CardsContainer(props) {
     }
     return (
       <PreviewCard
+        key={movie.id}
         {...movie}
         toggleFavorite={props.toggleFavorite}
         favoriteMovies={props.favoriteMovies}
