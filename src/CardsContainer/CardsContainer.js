@@ -5,9 +5,11 @@ function CardsContainer(props) {
   let ratedMovie;
   let moviesToDisplay;
   if (props.favoriteView) {
-    moviesToDisplay = props.allMovies.filter(movie => props.favoriteMovies.includes(movie.id))
+    moviesToDisplay = props.allMovies.filter((movie) =>
+      props.favoriteMovies.includes(movie.id)
+    );
   } else {
-    moviesToDisplay = props.allMovies
+    moviesToDisplay = props.allMovies;
   }
   let previewCards = moviesToDisplay.map((movie) => {
     if (props.userRatings) {
@@ -25,8 +27,13 @@ function CardsContainer(props) {
       />
     );
   });
-
-  return <div className="container">{previewCards}</div>;
+  if (!previewCards.length) {
+    return (
+      <h3>No Favorites Yet! Click on the Tomato Icon to add to favorites</h3>
+    );
+  } else {
+    return <div className="container">{previewCards}</div>;
+  }
 }
 
 export default CardsContainer;
