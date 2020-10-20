@@ -26,11 +26,15 @@ class MoviePage extends Component {
     }
     const response = await getIndividualMovie(this.state.movieId);
     const movie = await response.movie;
-    console.log(movie)
-    this.setState({movie, userRating});
+    const comments = await this.getMoviePageData()
+    console.log(comments)
+    this.setState({movie, userRating, comments});
   }
   getMoviePageData = async () => {
-    const comments = await getMovieComments(this.state.movieId)
+    const fetchedComments = await getMovieComments(this.state.movieId)
+    return await fetchedComments.comments
+    //should be array of comments
+
   }
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
