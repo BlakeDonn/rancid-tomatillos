@@ -31,7 +31,6 @@ class MoviePage extends Component {
     this.setState({movie, userRating});
   }
   determineFavorite = () => {
-    console.log(this.props)
     if (this.props.favoriteMovies.includes(parseInt(this.state.movieId))) {
       return (
         <Tomato

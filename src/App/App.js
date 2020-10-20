@@ -46,7 +46,6 @@ class App extends Component {
   toggleLogin = async (id) => {
     const ratings = await getUserRatings(id);
     const favoriteMovies = await getFavoriteMovies();
-    console.log(favoriteMovies)
     this.setState({
       loggedIn: !this.state.loggedIn,
       userId: id,
