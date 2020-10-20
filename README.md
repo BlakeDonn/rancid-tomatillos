@@ -7,7 +7,7 @@
 **Project Description**
 
 * A site to view average rating for movies (not logged in)
-* A site to add person ratings for a individual user (logged in)
+* A site to add personal ratings for a individual user (logged in)
 * A site to favorite movies and toggle between a favorited movie view (logged in) 
 * A site to comment on movies and see what other users have commented on, if logged in, they can make their own comments (logged / not logged in) 
 
