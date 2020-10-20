@@ -5,9 +5,6 @@ const Header = (props) => {
     <nav>
       <h1>Rotten Tomatillos</h1>
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
         {props.loggedIn && !props.favoriteView && (
           <li>
             <Link to="/" onClick={props.toggleFavoriteView}>
