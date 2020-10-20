@@ -79,9 +79,6 @@ describe("App", () => {
       const movieTitle = await waitFor(() => screen.getByText("Money Plane"));
       expect(movieTitle).toBeInTheDocument();
     });
-
-    // if you can't isolate history to individual it block-- history from past test can leak into the next test
-    // memoryrouter encapsulates history of environment
     it("User is redirected to login page on link click", async () => {
       render(
         <MemoryRouter>
@@ -95,10 +92,6 @@ describe("App", () => {
         screen.getByRole("button", {name: "Submit"})
       ).toBeInTheDocument();
     });
-    //when you put router inside of a component - makes it harder to test
-    //right now history is leaking from test above - starting at login page instead of home page
-    //quick fix:
-    //best practice take out router in app component + make sure render app in test -> wrapped in <Router history={history}
     it("Should route to a page with more movie details", async () => {
       render(
         <MemoryRouter>
