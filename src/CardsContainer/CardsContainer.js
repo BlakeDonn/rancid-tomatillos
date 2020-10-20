@@ -10,13 +10,12 @@ function CardsContainer(props) {
     if (ratedMovie) {
       movie.userRating = ratedMovie.rating;
     }
-    return <PreviewCard  {...movie} logged={props.loggedIn} />;
+    return <PreviewCard {...movie} logged={props.loggedIn} />;
   });
 
   return <div className="container">{previewCards}</div>;
 }
 
 export default CardsContainer;
-
 
 //replace dashboard with cardscontainer (delete one--redundant)
