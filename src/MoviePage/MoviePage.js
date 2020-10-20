@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {getIndividualMovie, postUserRating} from "../api";
 import {ReactComponent as Tomato} from "../Assets/tomato.svg";
 import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
+import PropTypes from 'prop-types'
 import "./MoviePage.css";
 
 class MoviePage extends Component {
@@ -126,7 +127,10 @@ class MoviePage extends Component {
 
 export default MoviePage;
 
-//TESTING
-//1. initial render? does it appear correctly?
-//2. do things work as intended? e.g. Login click event (in Login.test.js) - can click -> was fetch request called?
-//3. does it return correct value - correct values for
+MoviePage.propTypes = {
+  movie: PropTypes.object,
+  movieId: PropTypes.number,
+  userRating: PropTypes.string,
+  displayedRating: PropTypes.number,
+  userId: PropTypes.number,
+};

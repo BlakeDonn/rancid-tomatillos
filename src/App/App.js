@@ -10,6 +10,7 @@ import Header from "../Header/Header";
 import Login from "../Login/Login";
 import MoviePage from "../MoviePage/MoviePage";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import PropTypes from "prop-types";
 import {
   getAllMovies,
   getUserRatings,
@@ -131,4 +132,12 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  favoriteView: PropTypes.bool,
+  loggedIn: PropTypes.bool,
+  favoriteMovies: PropTypes.array,
+  movies: PropTypes.array,
+  userId: PropTypes.number,
+  userRatings: PropTypes.array,
+};
 export default App;
