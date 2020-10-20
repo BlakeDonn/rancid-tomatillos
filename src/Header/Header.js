@@ -8,6 +8,13 @@ const Header = (props) => {
         <li>
           <Link to="/">Home</Link>
         </li>
+        {props.loggedIn && (
+          <li>
+            <Link to="/" onClick={props.toggleFavoriteView}>
+              Favorites
+            </Link>
+          </li>
+        )}
         {!props.loggedIn && (
           <li>
             <Link to="/login">Login</Link>

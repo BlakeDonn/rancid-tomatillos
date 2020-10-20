@@ -3,7 +3,13 @@ import PreviewCard from "../PreviewCard/PreviewCard";
 
 function CardsContainer(props) {
   let ratedMovie;
-  let previewCards = props.allMovies.map((movie) => {
+  let moviesToDisplay;
+  if (props.favoriteView) {
+    moviesToDisplay = props.allMovies.filter(movie => props.favoriteMovies.includes(movie.id))
+  } else {
+    moviesToDisplay = props.allMovies
+  }
+  let previewCards = moviesToDisplay.map((movie) => {
     if (props.userRatings) {
       ratedMovie = props.userRatings.find((x) => x.movie_id === movie.id);
     }

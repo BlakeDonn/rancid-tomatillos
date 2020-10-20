@@ -24,6 +24,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      favoriteView: false,
       loggedIn: false,
       userId: 0,
       userRatings: [],
@@ -55,8 +56,11 @@ class App extends Component {
   toggleFavorite = async (id) => {
     await postFavorite(id);
     const newFavorites = await getFavoriteMovies();
-    console.log(newFavorites)
+    console.log(newFavorites);
     this.setState({favoriteMovies: newFavorites});
+  };
+  toggleFavoriteView = () => {
+    this.setState({favoriteView: true});
   };
   matchRating = (movieId, userRatings) => {
     let ratingsToSearch = userRatings ? userRatings : this.state.userRatings;
@@ -85,7 +89,11 @@ class App extends Component {
       );
     return (
       <>
-        <Header toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
+        <Header
+          toggleFavoriteView={this.toggleFavoriteView}
+          toggleLogin={this.toggleLogin}
+          loggedIn={this.state.loggedIn}
+        />
         <div className="page-container">
           <Switch>
             <Route
@@ -111,6 +119,7 @@ class App extends Component {
                 favoriteMovies={this.state.favoriteMovies}
                 toggleFavorite={this.toggleFavorite}
                 loggedIn={this.state.loggedIn}
+                favoriteView={this.state.favoriteView}
               />
             </Route>
             <Route exact path="/error" component={ErrorPage} />
