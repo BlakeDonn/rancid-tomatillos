@@ -1,28 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom"
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
-const PreviewCard = ({
-  history,
-  id,
-  poster_path,
-  title,
-  average_rating,
-  userRating,
-}) => {
-  const averageRating = Math.round(average_rating * 10) / 10
-  return (
-    <Link to={`movie/${id}`}
-      itemID={id}
-      className="preview-card"
-    >
-      <img src={poster_path} alt={`poster of ${title}`}></img>
-      <h3 className="movie-title">{title}</h3>
-      <p className="avg-rating">{averageRating}</p>
-      <p className="user-rating">
-        {userRating ? `Your rating: ${userRating}` : "Click for more details"}{" "}
-      </p>
-    </Link>
-  );
-};
-
+class PreviewCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorited: false,
+      loggedIn: false,
+    };
+  }
+  render() {
+    const averageRating = Math.round(this.props.average_rating * 10) / 10;
+    return (
+      <Link
+        to={`movie/${this.props.id}`}
+        itemID={this.props.id}
+        className="preview-card"
+      >
+        <img
+          src={this.props.poster_path}
+          alt={`poster of ${this.props.title}`}
+        ></img>
+        <h3 className="movie-title">{this.props.title}</h3>
+        <p className="avg-rating">{averageRating}</p>
+        <p className="more-details"> "Click for more details"</p>
+        <p className="user-rating">
+          {this.props.userRating && `Your rating: ${this.props.userRating}`}
+        </p>
+      </Link>
+    );
+  }
+}
 export default PreviewCard;
