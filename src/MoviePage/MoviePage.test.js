@@ -61,7 +61,7 @@ describe("MoviePage", () => {
     const match = {params: {id: 337401}, isExact: true, path: "", url: ""};
     render(
       <MemoryRouter>
-        <MoviePage {...match} />
+        <MoviePage {...match} favoriteMovies={[337401]} />
       </MemoryRouter>
     );
     const movieRuntime = await waitFor(() => screen.getByText("Runtime: 115 minutes"));

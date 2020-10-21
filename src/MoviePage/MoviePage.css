@@ -1,0 +1,4 @@
+.Parent {
+  display: grid;
+  place-items: center;
+}

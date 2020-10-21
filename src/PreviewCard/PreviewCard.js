@@ -1,34 +1,35 @@
-import React, {Component} from "react";
+import React from "react";
+import "./PreviewCard.css";
 import {Link} from "react-router-dom";
+import {ReactComponent as Tomato} from "../Assets/tomato.svg";
+import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
 
-class PreviewCard extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      favorited: false,
-      loggedIn: false,
-    };
-  }
-  render() {
-    const averageRating = Math.round(this.props.average_rating * 10) / 10;
-    return (
-      <Link
-        to={`movie/${this.props.id}`}
-        itemID={this.props.id}
-        className="preview-card"
-      >
-        <img
-          src={this.props.poster_path}
-          alt={`poster of ${this.props.title}`}
-        ></img>
-        <h3 className="movie-title">{this.props.title}</h3>
-        <p className="avg-rating">{averageRating}</p>
-        <p className="more-details"> "Click for more details"</p>
-        <p className="user-rating">
-          {this.props.userRating && `Your rating: ${this.props.userRating}`}
-        </p>
-      </Link>
+const PreviewCard = (props) => {
+  const average = Math.round(props.average_rating * 10) / 10;
+  const favorite = props.favoriteMovies.includes(props.id) ? (
+    <Tomato
+      onClick={() => props.toggleFavorite(props.id)}
+      className={"tomato"}
+    />
+  ) : (
+      <UnTomato
+        onClick={() => props.toggleFavorite(props.id)}
+        className={"tomato"}
+      />
     );
-  }
-}
+  return (
+    <div itemID={props.id} className="preview-card">
+      <img src={props.poster_path} alt={`poster of ${props.title}`}></img>
+      {props.logged && favorite}
+      <h3 className="movie-title">{props.title}</h3>
+      <p className="avg-rating">Average Rating: {average}</p>
+      <p className="user-rating">
+        {props.logged && props.userRating && `your rating: ${props.userRating}`}
+      </p>
+      <Link to={`movie/${props.id}`} className="more-details">
+        Click for more details
+      </Link>
+    </div>
+  );
+};
 export default PreviewCard;

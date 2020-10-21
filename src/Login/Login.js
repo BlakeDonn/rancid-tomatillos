@@ -10,7 +10,7 @@ class Login extends React.Component {
       badLogin: "",
     };
   }
-  
+
   updateValue = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
@@ -41,14 +41,13 @@ class Login extends React.Component {
           <input
             placeholder="email"
             name="email"
-            //type="text"
             onChange={this.updateValue}
             value={this.state.username}
           ></input>
           <input
             placeholder="password"
             name="password"
-            //type="password"
+            type="password"
             onChange={this.updateValue}
             value={this.state.password}
           ></input>

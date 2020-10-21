@@ -3,21 +3,38 @@ import PreviewCard from "../PreviewCard/PreviewCard";
 
 function CardsContainer(props) {
   let ratedMovie;
-  let previewCards = props.allMovies.map((movie) => {
+  let moviesToDisplay;
+  if (props.favoriteView && props.loggedIn) {
+    moviesToDisplay = props.allMovies.filter((movie) =>
+      props.favoriteMovies.includes(movie.id)
+    );
+  } else {
+    moviesToDisplay = props.allMovies;
+  }
+  let previewCards = moviesToDisplay.map((movie) => {
     if (props.userRatings) {
       ratedMovie = props.userRatings.find((x) => x.movie_id === movie.id);
     }
     if (ratedMovie) {
       movie.userRating = ratedMovie.rating;
     }
-    return <PreviewCard history={props.history} {...movie} />;
+    return (
+      <PreviewCard
+        key={movie.id}
+        {...movie}
+        toggleFavorite={props.toggleFavorite}
+        favoriteMovies={props.favoriteMovies}
+        logged={props.loggedIn}
+      />
+    );
   });
-
-  return <div className="container">
-    {previewCards}</div>;
+  if (!previewCards.length) {
+    return (
+      <h3>No Favorites Yet! Click on the Tomato Icon to add to favorites</h3>
+    );
+  } else {
+    return <div className="container">{previewCards}</div>;
+  }
 }
 
 export default CardsContainer;
-
-
-//replace dashboard with cardscontainer (delete one--redundant)
