@@ -107,7 +107,7 @@ class MoviePage extends Component {
             <h4>Genres:</h4>
             <ul>
               {this.state.movie.genres.map((genre) => (
-                <li>{genre}</li>
+                <li key={genre}>{genre}</li>
               ))}
             </ul>
           </div>
@@ -117,7 +117,7 @@ class MoviePage extends Component {
           <section className="movie-comments">
             <h4>Comments:</h4>
             {this.state.comments.length > 0 && this.state.comments.map(comment => (
-              <section className={comment.id}>
+              <section className={comment.id} key={comment.id}>
                 <h5>{comment.author} says:</h5>
                 <p>"{comment.comment}"</p>
               </section>))
