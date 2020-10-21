@@ -65,6 +65,10 @@ describe("MoviePage", () => {
       </MemoryRouter>
     );
     const movieRuntime = await waitFor(() => screen.getByText("Runtime: 115 minutes"));
+    const user1 = screen.getByText("trollsfan4ever says:");
+    const comment1 = screen.getByText("\"no thankyou\"")
     expect(movieRuntime).toBeInTheDocument();
+    expect(user1).toBeInTheDocument();
+    expect(comment1).toBeInTheDocument();
   });
 });
