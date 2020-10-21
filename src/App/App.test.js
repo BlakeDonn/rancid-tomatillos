@@ -136,7 +136,7 @@ describe("App", () => {
         expect(screen.getByText("Runtime: 82 minutes")).toBeInTheDocument()
       );
     });
-    it("Should display custom dashboard and have option to rate a movie if a user is logged in", async () => {
+    it("Should display custom dashboard features to favorite and rate movies if a user is logged in", async () => {
       postUserLogin.mockResolvedValue({
         user: {
           email: "marge@turing.io",
@@ -187,6 +187,7 @@ describe("App", () => {
        userEvent.click(screen.getByRole("button", {name: "Submit"}));
        await waitFor(() => expect(screen.getByText("Logout")).toBeInTheDocument())
        expect(screen.getByText("your rating: 3")).toBeInTheDocument()
+       expect(screen.getByText("tomato.svg")).toBeInTheDocument()
     })
     it("should display a movie page with comment form if a user is logged in", async () => {
       postUserLogin.mockResolvedValue(
