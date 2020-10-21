@@ -1,28 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import "./PreviewCard.css";
+import {Link} from "react-router-dom";
+import {ReactComponent as Tomato} from "../Assets/tomato.svg";
+import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
 
-const PreviewCard = ({
-  history,
-  id,
-  poster_path,
-  title,
-  average_rating,
-  userRating,
-}) => {
-  const averageRating = Math.round(average_rating * 10) / 10
+const PreviewCard = (props) => {
+  const average = Math.round(props.average_rating * 10) / 10;
+  const favorite = props.favoriteMovies.includes(props.id) ? (
+    <Tomato
+      onClick={() => props.toggleFavorite(props.id)}
+      className={"tomato"}
+    />
+  ) : (
+      <UnTomato
+        onClick={() => props.toggleFavorite(props.id)}
+        className={"tomato"}
+      />
+    );
   return (
-    <Link to={`movie/${id}`}
-      itemID={id}
-      className="preview-card"
-    >
-      <img src={poster_path} alt={`poster of ${title}`}></img>
-      <h3 className="movie-title">{title}</h3>
-      <p className="avg-rating">{averageRating}</p>
+    <div itemID={props.id} className="preview-card">
+      <img src={props.poster_path} alt={`poster of ${props.title}`}></img>
+      {props.logged && favorite}
+      <h3 className="movie-title">{props.title}</h3>
+      <p className="avg-rating">Average Rating: {average}</p>
       <p className="user-rating">
-        {userRating ? `Your rating: ${userRating}` : "Click for more details"}{" "}
+        {props.logged && props.userRating && `your rating: ${props.userRating}`}
       </p>
-    </Link>
+      <Link to={`movie/${props.id}`} className="more-details">
+        Click for more details
+      </Link>
+    </div>
   );
 };
-
 export default PreviewCard;

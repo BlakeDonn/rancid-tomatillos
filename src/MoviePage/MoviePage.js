@@ -1,5 +1,9 @@
 import React, {Component} from "react";
 import {getIndividualMovie, postUserRating} from "../api";
+import {ReactComponent as Tomato} from "../Assets/tomato.svg";
+import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
+import PropTypes from 'prop-types'
+import "./MoviePage.css";
 
 class MoviePage extends Component {
   constructor(props) {
@@ -18,15 +22,32 @@ class MoviePage extends Component {
     if (this.state.userId) {
       userRating = this.props.userRatings.find(
         (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
-        );
-        if (userRating) {
-          userRating = userRating.rating;
+      );
+      if (userRating) {
+        userRating = userRating.rating;
       }
     }
     const response = await getIndividualMovie(this.state.movieId);
     const movie = await response.movie;
     this.setState({movie, userRating});
   }
+  determineFavorite = () => {
+    if (this.props.favoriteMovies.includes(parseInt(this.state.movieId))) {
+      return (
+        <Tomato
+          onClick={() => this.props.toggleFavorite(this.state.movieId)}
+          className={"tomato"}
+        />
+      );
+    } else {
+      return (
+        <UnTomato
+          onClick={() => this.props.toggleFavorite(this.state.movieId)}
+          className={"tomato"}
+        />
+      );
+    }
+  };
   rateMovie = (e) => {
     const rating = parseInt(e.target.value);
     this.setState({displayedRating: rating});
@@ -43,25 +64,20 @@ class MoviePage extends Component {
         "You already have a rating for this movie, would you like to delete it?"
       );
       if (userInput) {
-        this.deleteMovie();
-      } else {
-        this.setState({userRating: this.state.displayedRating});
+        this.props.deleteRating(this.state.movieId);
+        this.setState({userRating: "Not yet rated"});
       }
     } else {
       this.setState({userRating: this.state.displayedRating});
     }
-
-    console.log(response);
-  };
-  deleteMovie = () => {
-    this.props.deleteRating(this.state.movieId);
-    this.setState({userRating: "Not yet rated"});
   };
   render() {
     if (this.state.movie === null) {
-      return (<p>Loading</p>)
+      return <p>Loading</p>;
     } else {
-      const averageRating = Math.round(this.state.movie.average_rating * 10) / 10
+      const tomatoType = this.determineFavorite()
+      const averageRating =
+        Math.round(this.state.movie.average_rating * 10) / 10;
       return (
         <div itemID={this.state.movie.id}>
           <img
@@ -74,9 +90,9 @@ class MoviePage extends Component {
           <div>
             <h4>Genres:</h4>
             <ul>
-              {this.state.movie.genres.map(genre => (
+              {this.state.movie.genres.map((genre) => (
                 <li>{genre}</li>
-                ))}
+              ))}
             </ul>
           </div>
           <p>Release Date: {this.state.movie.release_date}</p>
@@ -88,8 +104,8 @@ class MoviePage extends Component {
                 {this.state.userRating
                   ? `Your Current Rating ${this.state.userRating}`
                   : "Seen this Movie? Leave a rating!"}
+                {this.state.userId && tomatoType}
               </p>
-              {/*<button onClick={this.deleteMovie}>Delete Rating</button>*/}
               <label>Rating this movie - 1(hate) - 10 (love)</label>
               <input
                 onChange={this.rateMovie}
@@ -106,14 +122,15 @@ class MoviePage extends Component {
         </div>
       );
     }
-    
   }
 }
 
 export default MoviePage;
 
-
-//TESTING
-//1. initial render? does it appear correctly?
-//2. do things work as intended? e.g. Login click event (in Login.test.js) - can click -> was fetch request called?
-//3. does it return correct value - correct values for
+MoviePage.propTypes = {
+  movie: PropTypes.object,
+  movieId: PropTypes.number,
+  userRating: PropTypes.string,
+  displayedRating: PropTypes.number,
+  userId: PropTypes.number,
+};

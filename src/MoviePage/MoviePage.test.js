@@ -34,7 +34,7 @@ describe("MoviePage", () => {
   it("should mount with fetch data", async () => {
     render(
       <MemoryRouter>
-        <MoviePage {...match} />
+        <MoviePage {...match} favoriteMovies={[337401]} />
       </MemoryRouter>
     );
     const idea = await waitFor(() => screen.getByText("Runtime: 115 minutes"));

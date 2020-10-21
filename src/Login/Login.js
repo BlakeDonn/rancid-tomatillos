@@ -10,7 +10,7 @@ class Login extends React.Component {
       badLogin: "",
     };
   }
-  
+
   updateValue = (event) => {
     this.setState({[event.target.name]: event.target.value});
   };
@@ -20,19 +20,16 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    try {
-      const result = await postUserLogin(this.state);
-      console.log(result)
-      if (result.error) {
-        return this.setState({
-          password: "",
-          email: "",
-          badLogin: result.error,
-        });
-      } else {
-        this.props.toggleLogin(result.user.id);
-      }
-    } catch (e) {}
+    const result = await postUserLogin(this.state);
+    if (result.error) {
+      return this.setState({
+        password: "",
+        email: "",
+        badLogin: result.error,
+      });
+    } else {
+      this.props.toggleLogin(result.user.id);
+    }
   }
   render() {
     return (
@@ -42,14 +39,13 @@ class Login extends React.Component {
           <input
             placeholder="email"
             name="email"
-            //type="text"
             onChange={this.updateValue}
             value={this.state.username}
           ></input>
           <input
             placeholder="password"
             name="password"
-            //type="password"
+            type="password"
             onChange={this.updateValue}
             value={this.state.password}
           ></input>
