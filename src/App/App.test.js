@@ -2,19 +2,8 @@ import React from "react";
 import App from "./App";
 import {render, screen, waitFor} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-<<<<<<< HEAD
 import { MemoryRouter } from "react-router-dom";
-import { getAllMovies, getIndividualMovie, postUserLogin, getUserRatings, getMovieComments } from "../api";
-=======
-import {MemoryRouter} from "react-router-dom";
-import {
-  getAllMovies,
-  getIndividualMovie,
-  postUserLogin,
-  getUserRatings,
-  getFavoriteMovies,
-} from "../api";
->>>>>>> main
+import { getAllMovies, getIndividualMovie, postUserLogin, getUserRatings, getMovieComments, getFavoriteMovies } from "../api";
 import "@testing-library/jest-dom/extend-expect";
 import "@testing-library/jest-dom";
 jest.mock("../api.js");
@@ -67,16 +56,6 @@ describe("App", () => {
 
   describe("Header", () => {
     it("Should have a header with links", () => {
-<<<<<<< HEAD
-      render (
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-      )
-      
-      expect(screen.getByText('Rancid Tomatillos')).toBeInTheDocument();
-      expect(screen.getByText('Home')).toBeInTheDocument();
-=======
       render(
         <MemoryRouter>
           <App />
@@ -85,7 +64,6 @@ describe("App", () => {
 
       expect(screen.getByText("Rotten Tomatillos")).toBeInTheDocument();
       expect(screen.getByText("Home")).toBeInTheDocument();
->>>>>>> main
 
       const loginLink = screen.getByRole("link", {name: /login/i});
       expect(loginLink).toBeInTheDocument();
@@ -117,7 +95,6 @@ describe("App", () => {
       ).toBeInTheDocument();
     });
     it("Should route to a page with more movie details", async () => {
-<<<<<<< HEAD
       getMovieComments.mockResolvedValue(
         {
           "comments": [
@@ -143,8 +120,6 @@ describe("App", () => {
         }
       )
 
-=======
->>>>>>> main
       render(
         <MemoryRouter>
           <App />
@@ -205,7 +180,6 @@ describe("App", () => {
         <MemoryRouter>
           <App />
         </MemoryRouter>
-<<<<<<< HEAD
        )
        userEvent.click(screen.getByRole("link", {name: "Login"}));
        userEvent.type(screen.getByPlaceholderText("email"), "marge@turing.io");
@@ -306,14 +280,10 @@ describe("App", () => {
           <App />
         </MemoryRouter>
       )
-=======
-      );
->>>>>>> main
       userEvent.click(screen.getByRole("link", {name: "Login"}));
       userEvent.type(screen.getByPlaceholderText("email"), "marge@turing.io");
       userEvent.type(screen.getByPlaceholderText("password"), "password123");
       userEvent.click(screen.getByRole("button", {name: "Submit"}));
-<<<<<<< HEAD
       await waitFor(() => expect(screen.getByText("Logout")).toBeInTheDocument())
        
       const movieTitle = screen.getByAltText("poster of Mulan");
@@ -328,12 +298,5 @@ describe("App", () => {
       expect(commentPlaceholder).toBeInTheDocument()
       expect(userComment).toBeInTheDocument()
     })
-=======
-      await waitFor(() =>
-        expect(screen.getByText("Logout")).toBeInTheDocument()
-      );
-      expect(screen.getByText("your rating: 3")).toBeInTheDocument();
-    });
->>>>>>> main
   });
 });
