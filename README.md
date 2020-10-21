@@ -57,6 +57,8 @@
 * React
 * Jest
 
-**Other Important Features Implemented**
+**Future iterations**
 
-* PropTypes  
+* Add styling
+
+
