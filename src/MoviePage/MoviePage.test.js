@@ -57,7 +57,7 @@ describe("MoviePage", () => {
     )
   })
   
-  it("should mount with fetch data", async () => {
+  it("should mount with fetched data from movie and comment api's", async () => {
     const match = {params: {id: 337401}, isExact: true, path: "", url: ""};
     render(
       <MemoryRouter>
