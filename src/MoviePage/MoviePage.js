@@ -31,7 +31,6 @@ class MoviePage extends Component {
     const comments = moviePageData.comments.comments
     const userName = this.props.userName
     this.setState({movie, userRating, comments, userName});
-    console.log(this)
   }
   getMoviePageData = async () => {
     const data = {}
@@ -62,8 +61,6 @@ class MoviePage extends Component {
     } else {
       this.setState({userRating: this.state.displayedRating});
     }
-
-    console.log(response);
   };
   deleteMovie = () => {
     this.props.deleteRating(this.state.movieId);

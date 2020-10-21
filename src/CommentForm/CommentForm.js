@@ -10,7 +10,7 @@ class CommentForm extends Component {
   }
   updateValue = (e) => {
     this.setState({[e.target.name]: e.target.value})
-    console.log(this)
+
   }
   submitComment = async (e) => {
     e.preventDefault()
