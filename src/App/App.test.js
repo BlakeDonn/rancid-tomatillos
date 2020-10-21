@@ -62,7 +62,7 @@ describe("App", () => {
         </MemoryRouter>
       );
 
-      expect(screen.getByText("Rotten Tomatillos")).toBeInTheDocument();
+      expect(screen.getByText("Rancid Tomatillos")).toBeInTheDocument();
       expect(screen.getByText("Home")).toBeInTheDocument();
 
       const loginLink = screen.getByRole("link", {name: /login/i});
@@ -130,7 +130,7 @@ describe("App", () => {
       );
       expect(movieTitle).toBeInTheDocument();
       userEvent.click(
-        screen.getByRole("link", {name: "Click for more details"})
+        screen.getByRole("link", {name: "Click for details on Money Plane"})
       );
       await waitFor(() =>
         expect(screen.getByText("Runtime: 82 minutes")).toBeInTheDocument()
@@ -186,7 +186,7 @@ describe("App", () => {
        userEvent.type(screen.getByPlaceholderText("password"), "password123");
        userEvent.click(screen.getByRole("button", {name: "Submit"}));
        await waitFor(() => expect(screen.getByText("Logout")).toBeInTheDocument())
-       expect(screen.getByText("Your rating: 3")).toBeInTheDocument()
+       expect(screen.getByText("your rating: 3")).toBeInTheDocument()
     })
     it("should display a movie page with comment form if a user is logged in", async () => {
       postUserLogin.mockResolvedValue(
