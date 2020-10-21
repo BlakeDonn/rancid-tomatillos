@@ -20,16 +20,18 @@ class Login extends React.Component {
   };
 
   async postUserData() {
-    const result = await postUserLogin(this.state);
-    if (result.error) {
-      return this.setState({
-        password: "",
-        email: "",
-        badLogin: result.error,
-      });
-    } else {
-      this.props.toggleLogin(result.user.id);
-    }
+    try {
+      const result = await postUserLogin(this.state);
+      if (result.error) {
+        return this.setState({
+          password: "",
+          email: "",
+          badLogin: result.error,
+        });
+      } else {
+        this.props.toggleLogin(result.user);
+      }
+    } catch (e) {}
   }
   render() {
     return (

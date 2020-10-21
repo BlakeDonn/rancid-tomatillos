@@ -107,3 +107,31 @@ export const deleteUserRating = async (userId, ratingId) => {
     throw e;
   }
 };
+
+export const getMovieComments = async (movieId) => {
+  try {
+    let promise = await fetch(
+      `https://rancid-tomatillos-backend.herokuapp.com/api/v1/movies/${movieId}/comments`
+    );
+    return await promise.json();
+  } catch (e) {
+    throw e
+  }
+};
+
+export const postUserComment = async (movieId, userName, comment) => {
+  try {
+    fetch(`https://rancid-tomatillos-backend.herokuapp.com/api/v1/movies/${movieId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(
+        { comment: comment, author: userName }
+      )
+    })
+  } catch (e) {
+    throw e;
+  }
+};
+

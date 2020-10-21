@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {getIndividualMovie, postUserRating} from "../api";
+import {getIndividualMovie, getMovieComments, postUserRating} from "../api";
+import CommentForm from "../CommentForm/CommentForm";
 import {ReactComponent as Tomato} from "../Assets/tomato.svg";
 import {ReactComponent as UnTomato} from "../Assets/untomato.svg";
 import PropTypes from 'prop-types'
@@ -11,25 +12,36 @@ class MoviePage extends Component {
     this.state = {
       movie: null,
       error: "",
-      movieId: props.params.id,
+      movieId: parseInt(props.params.id),
+      userName: "",
       userRating: "Not yet rated",
       displayedRating: 0,
       userId: typeof props.userId === "number" ? props.userId : null,
+      comments: []
     };
   }
   async componentDidMount() {
     let userRating;
     if (this.state.userId) {
+      console.log(this.props)
       userRating = this.props.userRatings.find(
-        (rating) => parseInt(rating.movie_id) === parseInt(this.state.movieId)
-      );
-      if (userRating) {
-        userRating = userRating.rating;
+        (rating) => parseInt(rating.movie_id) === this.state.movieId
+        );
+        if (userRating) {
+          userRating = userRating.rating;
       }
     }
-    const response = await getIndividualMovie(this.state.movieId);
-    const movie = await response.movie;
-    this.setState({movie, userRating});
+    const moviePageData = await this.getMoviePageData()
+    const movie = moviePageData.details.movie;
+    const comments = moviePageData.comments.comments
+    const userName = this.props.userName
+    this.setState({movie, userRating, comments, userName});
+  }
+  getMoviePageData = async () => {
+    const data = {}
+    data.comments = await getMovieComments(this.state.movieId)
+    data.details = await getIndividualMovie(this.state.movieId)
+    return await data
   }
   determineFavorite = () => {
     if (this.props.favoriteMovies.includes(parseInt(this.state.movieId))) {
@@ -71,6 +83,10 @@ class MoviePage extends Component {
       this.setState({userRating: this.state.displayedRating});
     }
   };
+  deleteMovie = () => {
+    this.props.deleteRating(this.state.movieId);
+    this.setState({userRating: "Not yet rated"});
+  };
   render() {
     if (this.state.movie === null) {
       return <p>Loading</p>;
@@ -91,15 +107,27 @@ class MoviePage extends Component {
             <h4>Genres:</h4>
             <ul>
               {this.state.movie.genres.map((genre) => (
-                <li>{genre}</li>
+                <li key={genre}>{genre}</li>
               ))}
             </ul>
           </div>
           <p>Release Date: {this.state.movie.release_date}</p>
           <p>Runtime: {this.state.movie.runtime} minutes</p>
           <p>Average Rating: {averageRating}</p>
+          <section className="movie-comments">
+            <h4>Comments:</h4>
+            {this.state.comments.length > 0 && this.state.comments.map(comment => (
+              <section className={comment.id} key={comment.id}>
+                <h5>{comment.author} says:</h5>
+                <p>"{comment.comment}"</p>
+              </section>))
+            }
+          </section>
+          
           {this.state.userId ? (
-            <div>
+            
+            <section className="user-interaction-section">
+              <CommentForm userName={this.state.userName} movieId={this.state.movieId} />
               <p className="user-rating">
                 {this.state.userRating
                   ? `Your Current Rating ${this.state.userRating}`
@@ -115,10 +143,11 @@ class MoviePage extends Component {
                 required="required"
               ></input>
               <button onClick={this.submitRating}>Rate Movie</button>
-            </div>
+            </section>
           ) : (
-              <p>Log into your account to rate movies</p>
+              <p>Log into your account to rate and comment on movies</p>
             )}
+
         </div>
       );
     }

@@ -27,7 +27,7 @@ const PreviewCard = (props) => {
         {props.logged && props.userRating && `your rating: ${props.userRating}`}
       </p>
       <Link to={`movie/${props.id}`} className="more-details">
-        Click for more details
+        Click for details on {props.title}
       </Link>
     </div>
   );

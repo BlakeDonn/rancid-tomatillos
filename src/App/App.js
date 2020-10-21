@@ -27,6 +27,8 @@ class App extends Component {
       favoriteView: false,
       loggedIn: false,
       userId: 0,
+      userEmail: "",
+      userName: "",
       userRatings: [],
       movies: [],
       favoriteMovies: [],
@@ -43,12 +45,14 @@ class App extends Component {
       this.setState({error: movies.status});
     }
   }
-  toggleLogin = async (id) => {
-    const ratings = await getUserRatings(id);
+  toggleLogin = async (data) => {
+    const ratings = await getUserRatings(data.id);
     const favoriteMovies = await getFavoriteMovies();
     this.setState({
       loggedIn: !this.state.loggedIn,
-      userId: id,
+      userId: data.id,
+      userEmail: data.email,
+      userName: data.name,
       userRatings: ratings.ratings,
       favoriteMovies: favoriteMovies,
     });
@@ -94,6 +98,7 @@ class App extends Component {
           loggedIn={this.state.loggedIn}
           favoriteView={this.state.favoriteView}
         />
+        <h2>Welcome {this.state.userName}</h2>
         <div className="page-container">
           <Switch>
             <Route
@@ -102,6 +107,7 @@ class App extends Component {
                 <MoviePage
                   {...match}
                   userId={this.state.userId}
+                  userName={this.state.userName}
                   deleteRating={this.deleteRating}
                   userRatings={this.state.userRatings}
                   toggleFavorite={this.toggleFavorite}
