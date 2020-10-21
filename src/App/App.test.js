@@ -113,7 +113,7 @@ describe("App", () => {
             },
             {
               "comment": "no thankyou",
-              "author": "iluvmoviezzz",
+              "author": "Marge",
               "movieId": 337401,
               "id": 1603224859706
             },
@@ -264,7 +264,7 @@ describe("App", () => {
             },
             {
               "comment": "no thankyou",
-              "author": "iluvmoviezzz",
+              "author": "Marge",
               "movieId": 337401,
               "id": 1603224859706
             },
@@ -295,7 +295,11 @@ describe("App", () => {
       userEvent.click(screen.getByRole('link', {name: /mulan/i}))
       await waitFor(() => screen.debug())
       const mulanRuntime = screen.getByText("Runtime: 115 minutes")
+      const commentPlaceholder = screen.getByPlaceholderText("Your thoughts")
+      const userComment = screen.getByText("Marge says:")
       expect(mulanRuntime).toBeInTheDocument();
+      expect(commentPlaceholder).toBeInTheDocument()
+      expect(userComment).toBeInTheDocument()
     })
   });
 })
